@@ -4,9 +4,7 @@ import java.util.HashMap;
 class Spell {
 
 }
-class Point {
 
-}
 class Hero {
   private String type;
   private int health;
@@ -15,5 +13,16 @@ class Hero {
 }
 
 class State {
-  private HashMap<Point, Hero> heroMap;
+  private final HashMap<Point, Hero> heroMap;
+  State() {
+    this.heroMap = new HashMap<Point, Hero>();
+  }
+
+  State(HashMap<Point, Hero> heroMap) {
+    this.heroMap = heroMap;
+  }
+
+  public HashMap<Point, Hero> getHeroMap() {
+    return this.heroMap;
+  }
 }

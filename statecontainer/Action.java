@@ -8,4 +8,12 @@ class Action {
     this.type = type;
     this.payload = payload;
   }
+
+  String getType() {
+    return this.type;
+  }
+
+  Payload getPayload() {
+    return this.payload;
+  }
 }

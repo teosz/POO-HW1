@@ -9,9 +9,9 @@ class Main {
 
 class InitGamePayload extends Payload {
   Hero hero;
-  Point posistion;
-  InitGamePayload(Hero hero, Point posistion) {
+  Point position;
+  InitGamePayload(Hero hero, Point position) {
     this.hero = hero;
-    this.posistion = posistion;
+    this.position = position;
   }
 }
