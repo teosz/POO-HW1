@@ -35,7 +35,7 @@
       }
     }
   },
-  "knight": {
+  "Knight": {
     "base_hp": 900,
     "levelup_hp": 80,
     "spells": {
@@ -56,29 +56,80 @@
          "base_damage": 100,
          "levelup_damage": 40,
          "behavoirs": [{
-           "type": "freeze",
+           "type": "FREEZE",
            "rounds": "1",
          }],
          "modifiers": {
           "Rogue":	-20,
           "Knight":	20,
           "Pyromancer":	-10,
-          "Wizar":5,
+          "Wizard":5,
          }
-      },
-
-      "ability": {
-        "type": "land",
-        "terrain": "Land",
-        "damage": 15,
       }
-
+    },
+    "ability": {
+      "type": "land",
+      "terrain": "Land",
+      "damage": 15,
     }
   },
-  "wizard": {
-
+  "Wizard": {
+    "base_hp": 400,
+    "levelup_hp": 30,
+    "spells": {
+      "drain": {
+        "behavoirs": [{
+          "type": "PROPORTIONAL_DAMAGE_MIN",
+          "scale": 0.3,
+        }],
+        "modifiers": {
+          "Rogue":	-20,
+          "Knight":	20,
+          "Pyromancer":	-10,
+          "Wizard":	5,
+        }
+      },
+      "deflect": {
+        "behavoirs": [{
+          "type": "PROPORTIONAL_RETURN_DAMAGE",
+          "base": 35,
+          "levelup": 2,
+          "limit": 70,
+        }],
+        "modifiers": {
+          "Rogue": 20,
+          "Knight": 40,
+          "Pyromancer": 30,
+        }
+      }
+    },
+    "ability": {
+      "type": "land",
+      "terrain": "Desert",
+      "damage": 10,
+    }
   },
-  "rogue": {
+  "Rogue": {
+    "base_hp": 600,
+    "levelup_hp": 40,
+    "spells": [{
+      "backstab": {
+        "base_damage": 200,
+        "levelup_damage": 20,
+        "behavoirs": [{
+          "type": "CRITICAL",
+          "charge_rounds": 3,
+          "scale": 1.5,
+          "terrain": "Wood"
+        }],
+        "modifiers": {
+          "Rogue":	20,
+          "Knight":	10,
+          "Pyromancer":	25,
+          "Wizard":	25,
+        }
+      }
+    }]
 
   }
 }
