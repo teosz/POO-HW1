@@ -1,5 +1,5 @@
 package statecontainer;
-import java.util.Map;
+import java.util.HashMap;
 public interface State<T, Q> {
-  public HashMap<T, Q> getHeroMap();
+  HashMap<T, Q> getHeroMap();
 }

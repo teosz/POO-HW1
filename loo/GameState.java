@@ -8,7 +8,7 @@ class GameState implements State {
     this.heroMap = new HashMap<Point, Hero>();
   }
 
-  GameState(HashMap<Point, Hero> heroMap) {
+  GameState(final HashMap<Point, Hero> heroMap) {
     this.heroMap = heroMap;
   }
 

@@ -22,7 +22,7 @@ function checkTest
 {
     echo -ne "Test\t$1\t.....................................\t"
     java main.Main "$RESOURCES_DIRECTORY/in/$1.in" "$RESOURCES_DIRECTORY/out/$1.out"
-    
+
 	if [ $? -eq 0 ]; then
         `diff -Bw -u --ignore-all-space $RESOURCES_DIRECTORY/out/$1.out $RESOURCES_DIRECTORY/res/$1.in.res &> /dev/null`
         DIFF_RESULT=$?
@@ -36,7 +36,7 @@ function checkTest
             	GOOD_TESTS=$((GOOD_TESTS+21))
         	else
             	GOOD_TESTS=$((GOOD_TESTS+1))
-        	fi      
+        	fi
         else
            echo -ne "FAIL (files differ)\n"
         fi
@@ -49,13 +49,13 @@ function checkBonus
 {
 	echo -ne "Bonus\t\t.....................................\t"
 	java -jar checker/checkstyle/checkstyle-7.3-all.jar -c checker/checkstyle/poo_checks.xml * > checkstyle.txt
-	
+
 	YOUR_BONUS=`cat checkstyle.txt`
-	
+
 	if [[ "$GOOD_BONUS" != "$YOUR_BONUS" ]]; then
 		echo -ne "FAIL\n"
-		BAD_BONUS=`cat checkstyle.txt | grep -o 'Checkstyle ends with [0-9]* errors.' | grep -o '[0-9]*\d'`
-		
+		BAD_BONUS=`cat checkstyle.txt | grep -o 'Checkstyle ends with [0-9]* errors.' | grep -o '[0-9]*'`
+
 		if [ $BAD_BONUS -lt 30 ]; then
 			BAD_BONUS=0
 		else

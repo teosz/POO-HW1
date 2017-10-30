@@ -1,5 +1,8 @@
-class HeroFactory {
-  public static Hero build(String type) {
-    
+final class HeroFactory {
+  private HeroFactory() {
+
+  }
+  public static Hero build(final String type) {
+
   }
 }

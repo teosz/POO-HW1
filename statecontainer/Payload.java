@@ -1,3 +1,4 @@
 package statecontainer;
 
-public class Payload {}
+public class Payload {
+}

@@ -1,6 +1,9 @@
 package loo;
 
-public class Actions {
+public final class Actions {
+  private Actions() {
+
+  }
   public static final String ADD_HERO = "ADD_HERO";
   public static final String APPLY_ATTACK = "APPLY_ATTACK";
   public static final String APPLY_SPELL = "APPLY_SPELl";

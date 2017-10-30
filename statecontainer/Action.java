@@ -4,7 +4,7 @@ public class Action {
   private final String type;
   private final Payload payload;
 
-  public Action(String type, Payload payload) {
+  public Action(final String type, final Payload payload) {
     this.type = type;
     this.payload = payload;
   }
