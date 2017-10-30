@@ -1,11 +1,11 @@
 package statecontainer;
 
-class Store {
+public class Store {
   private State state;
   private final Reducer reducer;
 
-  Store(Reducer reducer) {
-    this.state = new State();
+  public Store(Reducer reducer, State initialState) {
+    this.state = initialState;
     this.reducer = reducer;
   }
 
