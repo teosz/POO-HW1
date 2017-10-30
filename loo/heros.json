@@ -1,0 +1,84 @@
+{
+  "Pyromancer": {
+    "base_hp": 500,
+    "levelup_hp": 50,
+    "spells": {
+      "fireblast": {
+        "base_damage": 350,
+        "levelup_damage": 50,
+        "modifiers": {
+          "Pyromancer":	-10,
+          "Wizard":	5,
+          "Knight": 20,
+          "Rogue": -20
+        }
+      },
+      "ignite": {
+        "base_damage": 150,
+        "levelup_damage": 20,
+        "per_round": {
+          "numOfRounds": 2,
+          "base_damage": 150,
+          "levelup_damage": 20,
+        },
+        "modifiers": {
+          "Rogue": -20,
+          "Knight": 20,
+          "Pyromancer": -10,
+          "Wizard": 5
+        },
+        "ability": {
+          "type": "land",
+          "terrain": "Volcanic",
+          "damage": 25,
+        }
+      }
+    }
+  },
+  "knight": {
+    "base_hp": 900,
+    "levelup_hp": 80,
+    "spells": {
+      "execute" : {
+        "base_damage": 150,
+        "levelup_damage": 20,
+        "ondead": {
+          "hp_limit": "MY_LIMIT",
+        },
+        "modifiers": {
+          "Rogue": 15,
+          "Knight": 0,
+          "Pyromancer": 10,
+          "Wizard": -20,
+        }
+      },
+      "slim": {
+         "base_damage": 100,
+         "levelup_damage": 40,
+         "behavoirs": [{
+           "type": "freeze",
+           "rounds": "1",
+         }],
+         "modifiers": {
+          "Rogue":	-20,
+          "Knight":	20,
+          "Pyromancer":	-10,
+          "Wizar":5,
+         }
+      },
+
+      "ability": {
+        "type": "land",
+        "terrain": "Land",
+        "damage": 15,
+      }
+
+    }
+  },
+  "wizard": {
+
+  },
+  "rogue": {
+
+  }
+}
