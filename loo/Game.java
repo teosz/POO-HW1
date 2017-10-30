@@ -5,8 +5,8 @@ import statecontainer.Payload;
 
 public class Game {
   final Store store;
-  public Game() {
-    this.store = new Store(new AttackReducer(), new GameState());
+  public Game(int n, int m) {
+    this.store = new Store(new AttackReducer(), new StateCell[n][m]);
   }
 
   public void addHero(char heroSymbol, int x, int y) {
