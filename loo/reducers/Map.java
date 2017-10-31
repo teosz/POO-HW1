@@ -8,18 +8,17 @@ import statecontainer.Reducer;
 import statecontainer.Action;
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.util.List;
 
-public class Map implements Reducer<StateCell[]> {
-  private int nr=0;
+public class Map implements Reducer<List<StateCell>> {
   @Override
-  public StateCell[] reduce(final StateCell[] state, final Action action) {
+  public List<StateCell> reduce(final List<StateCell> state, final Action action) {
     switch (action.getType()) {
       case Actions.ADD_HERO:
         Dictionary payload = action.getPayload();
         Hero hero = (Hero) (payload.get("hero"));
         Point position = (Point) (payload.get("position"));
-        state[this.nr++] = new StateCell(hero, position);
-        System.out.println(state[this.nr-1]);
+        state.add(new StateCell(hero, position));
         return state;
       default:
         return state;

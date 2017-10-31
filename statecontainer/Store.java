@@ -12,4 +12,8 @@ public class Store<T> {
   public void dispatch(final Action action) {
     this.state = this.reducer.reduce(state, action);
   }
+
+  public T getState() {
+    return state;
+  }
 }
