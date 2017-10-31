@@ -1,6 +1,7 @@
 package main;
 
 import loo.Game;
+import loo.Point;
 
 final class Main {
   private Main() {
@@ -8,9 +9,8 @@ final class Main {
   }
 
   public static void main(final String[] args) {
-    System.out.println(args[0]);
     Game game = new Game(2,2);
-    game.addHero('R', 0, 0);
-    System.out.println(args[1]);
+    game.addHero('W', new Point(0, 0));
+    game.addHero('R', new Point(0, 0));
   }
 }

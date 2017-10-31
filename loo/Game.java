@@ -1,19 +1,27 @@
 package loo;
+import loo.reducers.Combined;
 import statecontainer.Store;
 import statecontainer.Action;
 import statecontainer.Payload;
+import java.util.Dictionary;
+import java.util.Hashtable;
 
 public class Game {
   final Store store;
+  final HeroFactory heroFactory;
   public Game(int n, int m) {
-    this.store = new Store(new AttackReducer(), new StateCell[n][m]);
+    this.store = new Store(new Combined(), new StateCell[20]);
+    this.heroFactory = new HeroFactory();
   }
 
-  public void addHero(char heroSymbol, int x, int y) {
-    System.out.println(HeroFactory.createHero(heroSymbol));
-    // this.store.dispatch(new Action(
-      // Actions.ADD_HERO,
-      // new InitGamePayload(, new Point(x, y))));
+  public void addHero(char heroSymbol, Point position) {
+    Hero hero = this.heroFactory.createHero(heroSymbol);
+    Dictionary payload = new Hashtable();
+    payload.put("hero", hero);
+    payload.put("position", position);
+    this.store.dispatch(new Action(
+      Actions.ADD_HERO,
+      payload));
   }
 }
 
