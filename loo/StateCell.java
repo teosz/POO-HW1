@@ -1,9 +1,9 @@
 package loo;
-import java.util.ArrayList;
-public class StateCell {
+
+public final class StateCell {
   private Hero hero;
   private Point position;
-  public StateCell(Hero hero, Point position) {
+  public StateCell(final Hero hero, final Point position) {
     this.hero = hero;
     this.position = position;
   }

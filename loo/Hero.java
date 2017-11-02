@@ -1,6 +1,6 @@
 package loo;
 
-public class Hero {
+public final class Hero {
   private String type;
   private int baseHP;
   private int levelupHP;
@@ -8,7 +8,7 @@ public class Hero {
   private int level;
   private int experience;
   private Spell[] spells;
-  Hero(String type, int baseHP, int levelupHP) {
+  Hero(final String type, final int baseHP, final int levelupHP) {
     this.type = type;
     this.baseHP = baseHP;
     this.levelupHP = levelupHP;

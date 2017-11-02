@@ -1,8 +1,7 @@
 package statecontainer;
 import java.util.Dictionary;
-import java.util.Hashtable;
 
-public class Action {
+public final class Action {
   private final String type;
   private final Dictionary payload;
 

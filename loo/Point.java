@@ -1,6 +1,6 @@
 package loo;
 
-public class Point {
+public final class Point {
     private final int x, y;
     public Point(final int x, final int y) {
       this.x = x;
@@ -16,8 +16,8 @@ public class Point {
     }
 
     @Override
-    public boolean equals(Object obj) {
-      if(obj instanceof Point){
+    public boolean equals(final Object obj) {
+      if (obj instanceof Point) {
         Point point = (Point) obj;
         return (this.getX() == point.getX() && this.getY() == point.getY());
       }
@@ -29,6 +29,7 @@ public class Point {
       return Integer.valueOf(String.valueOf(this.x) + String.valueOf(this.y));
     }
 
+    @Override
     public String toString() {
       return String.format("(%d, %d)", this.x, this.y);
     }

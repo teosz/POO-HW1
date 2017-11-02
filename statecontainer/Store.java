@@ -1,6 +1,6 @@
 package statecontainer;
 
-public class Store<T> {
+public final class Store<T> {
   private T state;
   private final Reducer<T> reducer;
 

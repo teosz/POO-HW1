@@ -25,12 +25,13 @@ final class HeroFactory {
     );
   }
   private static String getTypeFromSymbol(final char heroSymbol) {
-    switch(heroSymbol) {
+    switch (heroSymbol) {
       case 'W':
         return "Wizard";
       case 'R':
         return "Rogue";
+      default:
+        return "";
     }
-    return "";
   }
 }
