@@ -14,6 +14,11 @@ public final class Store<T> {
   }
 
   public T getState() {
-    return state;
+    return this.state;
   }
+
+  // public Class<T> getMyType() {
+  //   return this.type;
+  // }
+
 }

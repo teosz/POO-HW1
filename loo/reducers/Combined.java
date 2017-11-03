@@ -7,7 +7,7 @@ import java.util.List;
 
 public final class Combined implements Reducer<List<StateCell>> {
   @Override
-  public List<StateCell> reduce(final List<StateCell> state, final Action action) {
+  public List<StateCell> reduce(List<StateCell> state, final Action action) {
     state = new Attack().reduce(state, action);
     state = new Map().reduce(state, action);
     return state;
