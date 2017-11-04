@@ -1,4 +1,5 @@
 package loo;
+import java.util.List;
 
 public final class Hero {
   private String type;
@@ -7,8 +8,8 @@ public final class Hero {
   private float hp;
   private int level;
   private int experience;
-  private Spell[] spells;
-  Hero(final String type, final int baseHP, final int levelupHP, Spell[] spells) {
+  private List<Spell> spells;
+  Hero(final String type, final int baseHP, final int levelupHP, List<Spell> spells) {
     this.type = type;
     this.baseHP = baseHP;
     this.levelupHP = levelupHP;
@@ -18,8 +19,17 @@ public final class Hero {
     this.level = 0;
   }
 
+  public List<Spell> getSpells() {
+    return this.spells;
+  }
+
+  public static Hero fromObject(Object hero) {
+    return Hero.class.cast(hero);
+  }
+
   public String toString() {
-    return String.format("%s exp %d", this.type, this.experience);
+    return String.format("%s %d %d (exp:%d) (%d)", this.type, this.baseHP, this.levelupHP, this.experience, this.spells.size());
+
   }
 
 }

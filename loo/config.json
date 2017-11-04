@@ -19,20 +19,20 @@
         "per_round": {
           "numOfRounds": 2,
           "base_damage": 150,
-          "levelup_damage": 20,
+          "levelup_damage": 20
         },
         "modifiers": {
           "Rogue": -20,
           "Knight": 20,
           "Pyromancer": -10,
           "Wizard": 5
-        },
-        "ability": {
-          "type": "land",
-          "terrain": "Volcanic",
-          "damage": 25,
         }
       }
+    },
+    "ability": {
+      "type": "land",
+      "terrain": "Volcanic",
+      "damage": 25
     }
   },
   "Knight": {
@@ -43,13 +43,13 @@
         "base_damage": 150,
         "levelup_damage": 20,
         "ondead": {
-          "hp_limit": "MY_LIMIT",
+          "hp_limit": "MY_LIMIT"
         },
         "modifiers": {
           "Rogue": 15,
           "Knight": 0,
           "Pyromancer": 10,
-          "Wizard": -20,
+          "Wizard": -20
         }
       },
       "slim": {
@@ -57,77 +57,85 @@
          "levelup_damage": 40,
          "behavoirs": [{
            "type": "FREEZE",
-           "rounds": "1",
+           "rounds": "1"
          }],
          "modifiers": {
           "Rogue":	-20,
           "Knight":	20,
           "Pyromancer":	-10,
-          "Wizard":5,
+          "Wizard":5
          }
       }
     },
     "ability": {
       "type": "land",
       "terrain": "Land",
-      "damage": 15,
+      "damage": 15
     }
   },
   "Wizard": {
-    "base_hp": 400,
-    "levelup_hp": 30,
-    "spells": {
-      "drain": {
-        "behavoirs": [{
-          "type": "PROPORTIONAL_DAMAGE_MIN",
-          "scale": 0.3,
-        }],
-        "modifiers": {
-          "Rogue":	-20,
-          "Knight":	20,
-          "Pyromancer":	-10,
-          "Wizard":	5,
-        }
+    "baseHP": 400,
+    "levelupHP": 30,
+    "spells": [{
+      "name": "drain",
+      "options": {
+        "scale": 0.3
       },
-      "deflect": {
-        "behavoirs": [{
-          "type": "PROPORTIONAL_RETURN_DAMAGE",
-          "base": 35,
-          "levelup": 2,
-          "limit": 70,
-        }],
-        "modifiers": {
-          "Rogue": 20,
-          "Knight": 40,
-          "Pyromancer": 30,
-        }
+      "modifiers": {
+        "Rogue":	-20,
+        "Knight":	20,
+        "Pyromancer":	-10,
+        "Wizard":	5
       }
-    },
+    }, {
+      "name": "deflect",
+      "options": {
+        "base": 35,
+        "levelup": 2,
+        "limit": 70
+      },
+      "modifiers": {
+        "Rogue": 20,
+        "Knight": 40,
+        "Pyromancer": 30
+      }
+    }],
     "ability": {
       "type": "land",
       "terrain": "Desert",
-      "damage": 10,
+      "damage": 10
     }
   },
   "Rogue": {
-    "base_hp": 600,
-    "levelup_hp": 40,
+    "baseHP": 600,
+    "levelupHP": 40,
     "spells": [{
-      "backstab": {
-        "base_damage": 200,
-        "levelup_damage": 20,
-        "behavoirs": [{
-          "type": "CRITICAL",
-          "charge_rounds": 3,
-          "scale": 1.5,
-          "terrain": "Wood"
-        }],
-        "modifiers": {
-          "Rogue":	20,
-          "Knight":	10,
-          "Pyromancer":	25,
-          "Wizard":	25,
-        }
+      "name": "backstab",
+      "baseDamage": 200,
+      "levelupDamage": 20,
+      "options": {
+        "charge_rounds": 3,
+        "scale": 1.5,
+        "terrain": "Wood"
+      },
+      "modifiers": {
+        "Rogue":	20,
+        "Knight":	10,
+        "Pyromancer":	25,
+        "Wizard":	25
+      }
+    }, {
+      "name": "paralysis",
+      "baseDamage": 40,
+      "levelupDamage": 10,
+      "options": {
+        "rounds": "1"
+      },
+      "modifiers": {
+        "Rogue":	-10,
+        "Knight":	-20,
+        "Pyromancer":	20,
+        "Wizard":	25
       }
     }]
 

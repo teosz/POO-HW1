@@ -1,31 +1,31 @@
 package loo;
 import java.util.Map;
-import jdk.nashorn.internal.runtime.JSONListAdapter;
-import jdk.nashorn.api.scripting.ScriptObjectMirror;
+import com.google.gson.JsonObject;
+import com.google.gson.Gson;
 
 final class HeroFactory {
-  private Map builders;
+  private JsonObject builders;
 
-  HeroFactory(Map builders) {
+  HeroFactory(JsonObject builders) {
     this.builders = builders;
-    System.out.println(builders.get("Pyromancer"));
-
   }
 
   public Hero create(final char heroSymbol) {
-    String type = getTypeFromSymbol(heroSymbol);
-    Map builder = (Map) this.builders.get(type);
-    System.out.println((JSONListAdapter)builder.get("spells"));
-    return new Hero(
-      type,
-      (int) builder.get("base_hp"),
-      (int) builder.get("levelup_hp"),
-      SpellFactory.batchCreate(
-        (Map) builder.get("spells")
-      )
+    return new Gson().fromJson(
+      getBuilderFromType(getTypeFromSymbol(heroSymbol)),
+      Hero.class
     );
   }
 
+  private JsonObject getBuilderFromType(String type) {
+    JsonObject builder = new Gson().fromJson(
+      this.builders.get(type),
+      JsonObject.class
+    );
+    builder.addProperty("type", type);
+    return builder;
+
+  }
   private static String getTypeFromSymbol(final char heroSymbol) {
     switch (heroSymbol) {
       case 'W':

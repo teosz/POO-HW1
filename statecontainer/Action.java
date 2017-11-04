@@ -1,11 +1,11 @@
 package statecontainer;
-import java.util.Dictionary;
+import java.util.Map;
 
 public final class Action {
   private final String type;
-  private final Dictionary payload;
+  private final Map payload;
 
-  public Action(final String type, final Dictionary payload) {
+  public Action(final String type, final Map<String, Object> payload) {
     this.type = type;
     this.payload = payload;
   }
@@ -14,7 +14,11 @@ public final class Action {
     return this.type;
   }
 
-  public Dictionary getPayload() {
+  public Map getPayload() {
     return this.payload;
+  }
+
+  public String toString() {
+    return String.format("%s", this.type);
   }
 }

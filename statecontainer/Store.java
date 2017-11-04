@@ -1,4 +1,5 @@
 package statecontainer;
+import java.util.List;
 
 public final class Store<T> {
   private T state;
@@ -11,6 +12,10 @@ public final class Store<T> {
 
   public void dispatch(final Action action) {
     this.state = this.reducer.reduce(state, action);
+  }
+
+  public void dispatch(final List<Action> actions) {
+    actions.forEach(action -> this.dispatch(action));
   }
 
   public T getState() {

@@ -15,6 +15,11 @@ public final class Point {
       return this.y;
     }
 
+    public static Point fromObject(Object point) {
+      return Point.class.cast(point);
+    }
+
+
     @Override
     public boolean equals(final Object obj) {
       if (obj instanceof Point) {

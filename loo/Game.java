@@ -3,81 +3,89 @@ import loo.reducers.Combined;
 import statecontainer.Store;
 import statecontainer.Action;
 import statecontainer.Payload;
-import java.util.Dictionary;
-import java.util.Hashtable  ;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.Map;
 import java.util.HashMap;
-import javax.script.ScriptException;
-import java.io.IOException;
+import com.google.gson.JsonObject;
+import com.google.gson.Gson;
 
 public final class Game {
-  private final Store store;
+  private final Store<List<StateCell>> store;
   private final HeroFactory heroFactory;
-  private Map config;
+  private final JsonObject config;
   public Game(final int n, final int m) {
-    this.store = new Store(new Combined(), new ArrayList<StateCell>());
-    JSONParsing parser = new JSONParsing();
-    config = new HashMap();
-    try {
-      config = parser.parseJson();
-    } catch (IOException e) {
-      System.err.println("IOException: " + e.getMessage());
-    } catch (ScriptException e) {
-      System.err.println("ScriptException: " + e.getMessage());
-    }
+    this.store = new Store<List<StateCell>>(new Combined(), new ArrayList<StateCell>());
+    this.config = new Gson().fromJson(FileManager.getContent(), JsonObject.class);
     this.heroFactory = new HeroFactory(config);
   }
 
   public void addHero(final char heroSymbol, final Point position) {
     Hero hero = this.heroFactory.create(heroSymbol);
-    Dictionary payload = new Hashtable();
-    payload.put("hero", hero);
-    payload.put("position", position);
-    this.store.dispatch(new Action(
-      Actions.ADD_HERO,
-      payload));
+    this.store.dispatch(ActionsCreator.createAddHeroAction(hero, position));
   }
-
-  private void computeActions(final List<Hero> list) {
-    // System.out.println(list);
+  private List<Action> computeAction(final List<Hero> list) {
+    List<Action> actions = new ArrayList<Action>();
     for (Hero current : list) {
       for (Hero opponent : list) {
         if (current != opponent) {
-          System.out.println(current);
-          System.out.println(opponent);
+          actions.addAll(
+            current.getSpells()
+             .stream()
+             .map(x ->
+                ActionsCreator.createApplySpellAction(x, current, opponent)
+              ).
+             collect(Collectors.toList())
+          );
         }
+      }
     }
+    return actions;
   }
-    // return list;
+
+  private List<Action> computeActions(List<StateCell> state) {
+    return state.stream()
+      .collect(Collectors.groupingBy(StateCell::getPosition))
+      .entrySet()
+      .stream()
+      .filter(entry -> (entry.getValue().size() > 1))
+      .flatMap(entry -> computeAction(
+        entry.getValue().stream()
+          .map(StateCell::getHero)
+          .collect(Collectors.toList())
+      ).stream())
+      .collect(Collectors.toList());
+  }
+
+  @SuppressWarnings("unchecked")
+  private List<StateCell> getState() {
+    return (List<StateCell>) this.store.getState();
   }
   public void startRound(final char move) {
-    // this.store.dispatch(newActions.START_ROUND);
-    // List<StateCell> state = ;
-    ((List<StateCell>) this.store.getState())
-        .stream()
-        .collect(Collectors.groupingBy(StateCell::getPosition))
-        .forEach((key, list) -> computeActions(
-          list.stream()
-              .map(StateCell::getHero)
-              .collect(Collectors.toList())
-        ));
-      // for(player : ) {
-        // for(opponent : this.store.getState()) {
-          // Spell.computeAttacks(player.hero).each(dispatch(Actions.START_ATTACK));
-      // }
-      // this.store.dispatch(Actions.MOVE_ALL_HEROS, move);
-    // }
+    List<StateCell> state = this.getState();
+    List<Action> actions = this.computeActions(state);
+    this.store.dispatch(actions);
   }
 }
 
-class InitGamePayload extends Payload {
-  private final Hero hero;
-  private final Point position;
-  InitGamePayload(final Hero hero, final Point position) {
-    this.hero = hero;
-    this.position = position;
+class ActionsCreator {
+  public static Action createAddHeroAction(Hero hero, Point position) {
+    Map<String, Object> payload = new HashMap<String, Object>();
+    payload.put("hero", hero);
+    payload.put("position", position);
+    return new Action(
+      Actions.ADD_HERO,
+      payload);
+  }
+
+  public static Action createApplySpellAction(Spell spell, Hero current, Hero opponent) {
+    Map<String, Object> payload = new HashMap<String, Object>();
+    payload.put("current", current);
+    payload.put("opponent", opponent);
+    payload.put("spell", spell);
+    return new Action(
+      "APPLY_SPELL_"+spell.getName().toUpperCase(),
+      payload);
   }
 }
