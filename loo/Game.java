@@ -10,33 +10,48 @@ import java.util.Map;
 import java.util.HashMap;
 import com.google.gson.JsonObject;
 import com.google.gson.Gson;
+import util.FileManager;
 
 public final class Game {
   private final Store<List<StateCell>> store;
   private final HeroFactory heroFactory;
   private final JsonObject config;
-  public Game(final int n, final int m) {
+  private final Map<Point, Character> terrianType;
+
+  public Game(int mapWidth, int mapHeight, List<String> terrianMatrix) {
     this.store = new Store<List<StateCell>>(new Combined(), new ArrayList<StateCell>());
-    this.config = new Gson().fromJson(FileManager.getContent(), JsonObject.class);
+    this.terrianType = new HashMap<Point, Character>();
+    this.config = new Gson().fromJson(FileManager.getContent("loo/config.json"), JsonObject.class);
     this.heroFactory = new HeroFactory(config);
+    for(int i = 0; i<mapHeight;i++)
+      for(int j = 0; j<mapWidth;j++) {
+
+        terrianType.put(new Point(i,j), terrianMatrix.get(i).charAt(j));
+      }
+    System.out.println(terrianType);
   }
 
   public void addHero(final char heroSymbol, final Point position) {
     Hero hero = this.heroFactory.create(heroSymbol);
     this.store.dispatch(ActionsCreator.createAddHeroAction(hero, position));
   }
-  private List<Action> computeAction(final List<Hero> list) {
+  private List<Action> computeAction(final List<StateCell> list) {
+    System.out.println(list);
     List<Action> actions = new ArrayList<Action>();
-    for (Hero current : list) {
-      for (Hero opponent : list) {
-        if (current != opponent) {
+    for (StateCell current : list) {
+      for (StateCell opponent : list) {
+          Hero currentHero = current.getHero();
+          Hero opponentHero = opponent.getHero();
+          if(currentHero != opponentHero) {
+          Character terrian = this.terrianType.get(current.getPosition());
           actions.addAll(
-            current.getSpells()
-             .stream()
-             .map(x ->
-              ActionsCreator.createApplySpellAction(x, current, opponent)
-             ).collect(Collectors.toList())
+            currentHero.getSpells()
+            .stream()
+            .map(x ->
+            ActionsCreator.createApplySpellAction(x, currentHero, opponentHero, terrian)
+            ).collect(Collectors.toList())
           );
+
         }
       }
     }
@@ -53,11 +68,7 @@ public final class Game {
       .entrySet()
       .stream()
       .filter(entry -> (entry.getValue().size() > 1))
-      .flatMap(entry -> computeAction(
-        entry.getValue().stream()
-          .map(StateCell::getHero)
-          .collect(Collectors.toList())
-      ).stream())
+      .flatMap(entry -> computeAction(entry.getValue()).stream())
       .collect(Collectors.toList());
   }
 
@@ -82,11 +93,12 @@ class ActionsCreator {
       payload);
   }
 
-  public static Action createApplySpellAction(Spell spell, Hero current, Hero opponent) {
+  public static Action createApplySpellAction(Spell spell, Hero current, Hero opponent, Character terrian) {
     Map<String, Object> payload = new HashMap<String, Object>();
     payload.put("current", current);
     payload.put("opponent", opponent);
     payload.put("spell", spell);
+    payload.put("terrian", terrian);
     return new Action(
       "APPLY_SPELL_"+spell.getName().toUpperCase(),
       payload);

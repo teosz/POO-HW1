@@ -31,7 +31,6 @@ public final class Attack implements Reducer<List<StateCell>> {
         int sum = current.getHits().stream().mapToInt(x -> x.getBaseDamage()).sum();
         float modifier = 1 + spell.getModifier(opponent);
         opponent.hit(spell, Math.round(percentage*sum*modifier));
-        System.out.println(state);
         return state;
       }
 
