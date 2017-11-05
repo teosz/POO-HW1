@@ -14,7 +14,6 @@ import java.lang.Math;
 public final class RoundManagement implements Reducer<List<StateCell>> {
   @Override
   public List<StateCell> reduce(final List<StateCell> state, final Action action) {
-    System.out.println(state);
     switch (action.getType()) {
       case Actions.START_ROUND:
         List<Hero> heros = state.stream()

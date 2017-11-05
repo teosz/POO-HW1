@@ -1,4 +1,4 @@
 *.class
-checkstyle.txt
+./checkstyle.txt
 META-INF
 com

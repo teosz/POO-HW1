@@ -46,7 +46,6 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
       case "APPLY_SPELL_DEFLECT": {
         float percentage = (float) spell.getBaseDamage() / 100;
         int sum = current.getHits().stream().mapToInt(x -> x.getBaseDamage()).sum();
-        System.out.println(current.getHits());
         opponent.hit(spell, Math.round(percentage*sum*modifier));
         return state;
       }

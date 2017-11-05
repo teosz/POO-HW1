@@ -11,17 +11,25 @@ BAD_BONUS=0
 function cleanHomework
 {
 	find . -name "*.class" -type f -delete
+	rm -rf "$RESOURCES_DIRECTORY/out"
 }
 
 function compileHomework
 {
+	if [ -f "$CURRENT_DIRECTORY/FileIO.jar" ]
+	then
+		unzip FileIO.jar
+	fi
+
 	javac -g main/Main.java
+
+	mkdir "$RESOURCES_DIRECTORY/out"
 }
 
 function checkTest
 {
     echo -ne "Test\t$1\t.....................................\t"
-    java main.Main "$RESOURCES_DIRECTORY/in/$1.in" "$RESOURCES_DIRECTORY/out/$1.out"
+    java main.Main "$RESOURCES_DIRECTORY/in/$1.in" "$RESOURCES_DIRECTORY/out/$1.out" > /dev/null
 
 	if [ $? -eq 0 ]; then
         `diff -Bw -u --ignore-all-space $RESOURCES_DIRECTORY/out/$1.out $RESOURCES_DIRECTORY/res/$1.in.res &> /dev/null`
@@ -48,7 +56,7 @@ function checkTest
 function checkBonus
 {
 	echo -ne "Bonus\t\t.....................................\t"
-	java -jar checker/checkstyle/checkstyle-7.3-all.jar -c checker/checkstyle/poo_checks.xml * > checkstyle.txt
+	java -jar checker/checkstyle/checkstyle-7.3-all.jar -c checker/checkstyle/poo_checks.xml *  > checkstyle.txt
 
 	YOUR_BONUS=`cat checkstyle.txt`
 
@@ -56,7 +64,7 @@ function checkBonus
 		echo -ne "FAIL\n"
 		BAD_BONUS=`cat checkstyle.txt | grep -o 'Checkstyle ends with [0-9]* errors.' | grep -o '[0-9]*'`
 
-		if [ $BAD_BONUS -lt 30 ]; then
+		if [[ $BAD_BONUS -lt 30 ]]; then
 			BAD_BONUS=0
 		else
 			BAD_BONUS=20

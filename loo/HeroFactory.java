@@ -26,6 +26,16 @@ final class HeroFactory {
     return builder;
 
   }
+  public static char getSymbolFromType(final String type) {
+    switch (type) {
+      case "Wizard":
+        return 'W';
+      case "Rogue":
+        return 'R';
+      default:
+        return ' ';
+    }
+  }
   private static String getTypeFromSymbol(final char heroSymbol) {
     switch (heroSymbol) {
       case 'W':

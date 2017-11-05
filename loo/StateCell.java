@@ -16,8 +16,12 @@ public final class StateCell {
   public Hero getHero() {
     return hero;
   }
-
+  public void move(Point move) {
+      this.position.add(move);
+  }
   public String toString() {
-    return String.format("%s at %s", this.hero, this.position);
+    if(this.hero.isDead())
+      return String.format("%s", this.hero);
+    return String.format("%s %s", this.hero, this.position);
   }
 }

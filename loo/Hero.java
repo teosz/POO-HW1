@@ -34,6 +34,10 @@ public final class Hero {
     this.level = 0;
   }
 
+  public static Hero fromObject(Object hero) {
+    return Hero.class.cast(hero);
+  }
+
   public void freeze(int rounds) {
     this.frozenRounds = rounds;
   }
@@ -87,12 +91,14 @@ public final class Hero {
     return this.spells;
   }
 
-  public static Hero fromObject(Object hero) {
-    return Hero.class.cast(hero);
+  public boolean isDead() {
+    return (this.currentHP <= 0);
   }
-
   public String toString() {
-    return String.format("%s %d %d (exp:%d) (%d)", this.type, this.currentHP, this.levelupHP, this.experience, this.spells.size());
+    Character symbol = HeroFactory.getSymbolFromType(this.type);
+    if(this.isDead())
+      return String.format("%c dead", symbol);
+    return String.format("%c %d %d %d", symbol, this.level, this.experience, this.currentHP);
   }
 
 }

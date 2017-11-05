@@ -58,4 +58,13 @@ class ActionCreator {
   public static Action endBattle() {
     return new Action(Actions.END_BATTLE);
   }
+
+  public static Action moveBySequence(String sequence) {
+    Map<String, Object> payload = new HashMap<String, Object>();
+    payload.put("sequence", sequence);
+    return new Action(
+      Actions.MOVE_BY_SEQUENCE,
+      payload
+    );
+  }
 }

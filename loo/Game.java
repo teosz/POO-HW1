@@ -26,10 +26,8 @@ public final class Game {
     this.heroFactory = new HeroFactory(config);
     for(int i = 0; i<mapHeight;i++)
       for(int j = 0; j<mapWidth;j++) {
-
         terrianType.put(new Point(i,j), terrianMatrix.get(i).charAt(j));
       }
-    // System.out.println(terrianType);
   }
 
   public void addHero(final char heroSymbol, final Point position) {
@@ -86,14 +84,17 @@ public final class Game {
     return actions;
 
   }
-
-  public void startRound(final char move) {
+  public String getGameStats() {
+    return this.getState()
+      .stream()
+      .map(x -> x.toString())
+      .collect(Collectors.joining("\n"));
+  }
+  public void startRound(final String moveSequence) {
     List<StateCell> state = this.getState();
-    List<Action> actions = wrapActions(
-      ActionCreator.startRound(),
-      this.getRoundActions(state),
-      ActionCreator.endRound()
-    );
-    this.store.dispatch(actions);
+    this.store.dispatch(ActionCreator.startRound());
+    this.store.dispatch(this.getRoundActions(state));
+    this.store.dispatch(ActionCreator.moveBySequence(moveSequence));
+    this.store.dispatch(ActionCreator.endRound());
   }
 }

@@ -1,7 +1,7 @@
 package loo;
 
 public final class Point {
-    private final int x, y;
+    private int x, y;
     public Point(final int x, final int y) {
       this.x = x;
       this.y = y;
@@ -15,10 +15,13 @@ public final class Point {
       return this.y;
     }
 
+    public void add(Point a) {
+      this.x += a.getX();
+      this.y += a.getY();
+    }
     public static Point fromObject(Object point) {
       return Point.class.cast(point);
     }
-
 
     @Override
     public boolean equals(final Object obj) {
@@ -36,6 +39,6 @@ public final class Point {
 
     @Override
     public String toString() {
-      return String.format("(%d, %d)", this.x, this.y);
+      return String.format("%d %d", this.x, this.y);
     }
 }
