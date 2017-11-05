@@ -34,13 +34,16 @@ public final class Game {
             current.getSpells()
              .stream()
              .map(x ->
-                ActionsCreator.createApplySpellAction(x, current, opponent)
-              ).
-             collect(Collectors.toList())
+              ActionsCreator.createApplySpellAction(x, current, opponent)
+             ).collect(Collectors.toList())
           );
         }
       }
     }
+    //add start battle
+    Action action = actions.stream().filter(x -> x.getType().equals("APPLY_SPELL_DEFLECT")).collect(Collectors.toList()).get(0);
+    actions.add(actions.remove(actions.indexOf(action)));
+    //add end battle
     return actions;
   }
 

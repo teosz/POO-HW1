@@ -75,12 +75,12 @@
   },
   "Wizard": {
     "baseHP": 400,
+    "currentHP": 400,
     "levelupHP": 30,
     "spells": [{
       "name": "drain",
-      "options": {
-        "scale": 0.3
-      },
+      "baseDamage": 20,
+      "levelupDamage": 5,
       "modifiers": {
         "Rogue":	-20,
         "Knight":	20,
@@ -89,9 +89,9 @@
       }
     }, {
       "name": "deflect",
+      "baseDamage": 35,
+      "levelupDamage": 3,
       "options": {
-        "base": 35,
-        "levelup": 2,
         "limit": 70
       },
       "modifiers": {
@@ -108,6 +108,7 @@
   },
   "Rogue": {
     "baseHP": 600,
+    "currentHP": 600,
     "levelupHP": 40,
     "spells": [{
       "name": "backstab",
