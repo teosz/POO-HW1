@@ -1,5 +1,6 @@
 package loo;
 import java.util.List;
+import java.util.Map;
 import java.util.ArrayList;
 
 public final class Hero {
@@ -12,6 +13,7 @@ public final class Hero {
   private int experience;
   private int frozenRounds;
   private List<Spell> spells;
+  private Map ability;
   private List<Integer> plainHits;
   private List<Integer> delayedHits;
   private List<Hero> delayedAuthors;
@@ -97,6 +99,15 @@ public final class Hero {
 
   public Hero popDelayedAuthor() {
    return this.delayedAuthors.remove(0);
+  }
+
+  public String getAbilityTerrain() {
+    return this.ability.get("terrain").toString();
+  }
+
+  public float getAbilityModifier() {
+    double modifier = (double) this.ability.get("modifier");
+    return (float) modifier / 100;
   }
 
   public int getLevel() {

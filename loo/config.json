@@ -101,9 +101,8 @@
       }
     }],
     "ability": {
-      "type": "land",
       "terrain": "Desert",
-      "damage": 10
+      "modifier": 10
     }
   },
   "Rogue": {
@@ -140,7 +139,10 @@
         "Pyromancer":	20,
         "Wizard":	25
       }
-    }]
-
+    }],
+    "ability": {
+      "terrain": "Woods",
+      "modifier": 15
+    }
   }
 }

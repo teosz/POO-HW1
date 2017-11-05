@@ -32,28 +32,28 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
     Hero opponent = Hero.fromObject(payload.get("opponent"));
     Hero current = Hero.fromObject(payload.get("current"));
     String terrain = getTerrain(Character.class.cast(payload.get("terrain")));
-    int baseDamage = spell.getBaseDamage();
-    float modifier = 1 + spell.getModifier(opponent);
     Map options = spell.getOptions();
-    System.out.println(action);
+    int baseDamage = spell.getBaseDamage();
+    float terrainModifier = new Float(1.0);
+    float spellModifier = 1 + spell.getModifier(opponent);
+    if(current.getAbilityTerrain().equals(terrain))
+      terrainModifier += current.getAbilityModifier();
+    float modifier = spellModifier * terrainModifier;
+    System.out.println(spellModifier);
     switch (action.getType()) {
       case "APPLY_SPELL_DRAIN": {
         float hp = Math.min(new Float(0.3) * opponent.getBaseHP(), opponent.getCurrentHP());
         float percentage = (float) baseDamage / 100;
-        System.out.println("NOW");
-        System.out.println(state);
         opponent.hit(
           current,
           Math.round(modifier*percentage*hp),
           Math.round(percentage*hp)
         );
-        System.out.println("AFTER");
-        System.out.println(state);
         return state;
       }
 
       case "APPLY_SPELL_DEFLECT": {
-        if(modifier != 1.0) {
+        if(spellModifier != 1.0) {
           float percentage = (float) spell.getBaseDamage() / 100;
           int sum = current.getPlainHits().stream().mapToInt(Integer::intValue).sum();
           opponent.hit(current, Math.round(percentage*sum*modifier));
