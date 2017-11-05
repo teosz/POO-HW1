@@ -14,9 +14,12 @@ public final class Hero {
   private List<Spell> spells;
   private List<Integer> plainHits;
   private List<Integer> delayedHits;
+  private List<Hero> delayedAuthors;
+  private Hero killer;
 
   Hero() {
     this.delayedHits = new ArrayList<Integer>();
+    this.delayedAuthors = new ArrayList<Hero>();
     this.plainHits = new ArrayList<Integer>();
     this.experience = 0;
     this.level = 0;
@@ -42,21 +45,46 @@ public final class Hero {
     this.frozenRounds = rounds;
   }
 
-  public void hit(int damage, int plainDamage) {
+  public boolean isFrozen() {
+    return (this.frozenRounds > 0);
+  }
+
+  public void decreseFrozenRounds() {
+    this.frozenRounds--;
+  }
+
+  public void increaseXP(int looserLevel) {
+    System.out.println("here");
+    this.experience += Math.max(0, 200 - (this.getLevel() - looserLevel * 40));
+  }
+
+  public void levelUP() {
+    // if(250 + this.get) {
+    //
+    // }
+  }
+
+  public void hit(Hero author, int damage, int plainDamage) {
     this.plainHits.add(plainDamage);
     this.currentHP -= damage;
+    if(this.isDead())
+      this.killer = author;
+  }
+
+  public void hit(Hero author, int damage) {
+    this.currentHP -= damage;
+    if(this.isDead())
+      this.killer = author;
   }
 
   public void clearPlainHits() {
     this.plainHits.clear();
   }
 
-  public void hit(int damage) {
-    this.currentHP -= damage;
-  }
 
-  public void hitWithDelay(int damage) {
+  public void hitWithDelay(Hero author, int damage) {
     this.delayedHits.add(damage);
+    this.delayedAuthors.add(author);
   }
 
   public List<Integer> getDelayedHits() {
@@ -67,6 +95,13 @@ public final class Hero {
     return this.delayedHits.remove(0);
   }
 
+  public Hero popDelayedAuthor() {
+   return this.delayedAuthors.remove(0);
+  }
+
+  public int getLevel() {
+    return this.level;
+  }
   public int getCurrentHP() {
     return this.currentHP;
   }
@@ -81,6 +116,10 @@ public final class Hero {
 
   public int getBaseHP() {
     return this.baseHP;
+  }
+
+  public Hero getKiller() {
+    return this.killer;
   }
 
   public String getType() {

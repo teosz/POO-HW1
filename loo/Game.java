@@ -52,8 +52,10 @@ public final class Game {
     List<Hero> heros = this.getHeros(list);
     Character terrian = this.terrianType.get(position);
     List<Action> actions = ActionCreator.spellFromHeros(heros, terrian);
-    Action action = actions.stream().filter(x -> x.getType().equals("APPLY_SPELL_DEFLECT")).collect(Collectors.toList()).get(0);
-    actions.add(actions.remove(actions.indexOf(action)));
+    List<Action> deflectActions = actions.stream().filter(x -> x.getType().equals("APPLY_SPELL_DEFLECT")).collect(Collectors.toList());
+    if(deflectActions.size() > 0) {
+      actions.add(actions.remove(actions.indexOf(deflectActions.get(0))));
+    }
     return wrapActions(
       ActionCreator.startBattle(),
       actions,

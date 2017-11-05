@@ -36,9 +36,13 @@ class ActionCreator {
   }
 
   public static List<Action> spellFromHeros(final List<Hero> heros, final Character terrain) {
-    return heros.stream().flatMap(
-      x -> heros.stream().filter(y -> !y.equals(x)).flatMap(y ->
-        spellFromHero(x, y, terrain)
+    return heros.stream()
+      .filter(x -> !x.isDead())
+      .flatMap(x -> heros.stream()
+            .filter(y -> !y.equals(x))
+            .filter(y -> !y.isDead())
+            .flatMap(y ->
+              spellFromHero(x, y, terrain)
       )
     ).collect(Collectors.toList());
   }

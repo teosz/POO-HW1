@@ -37,7 +37,10 @@ public final class MapReducer implements Reducer<List<StateCell>> {
       case Actions.MOVE_BY_SEQUENCE:
         String sequence = payload.get("sequence").toString();
         for(int i = 0; i < state.size(); i++) {
-          state.get(i).move(getMoveBy(sequence.charAt(i)));
+          StateCell cell = state.get(i);
+          if(!cell.getHero().isFrozen()) {
+            cell.move(getMoveBy(sequence.charAt(i)));
+          }
         }
         return state;
       default:

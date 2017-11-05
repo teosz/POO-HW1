@@ -28,7 +28,6 @@ public class Spell {
     if(this.modifiers.containsKey(key)) {
       double modifier = (double) this.modifiers.get(key);
       return (float) modifier / 100;
-
     }
     return 0;
   }

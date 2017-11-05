@@ -40,7 +40,11 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
         if(modifier != 0) {
           float hp = Math.min(new Float(0.3) * opponent.getBaseHP(), opponent.getCurrentHP());
           float percentage = (float) baseDamage / 100;
-          opponent.hit(Math.round(modifier*percentage*hp), Math.round(percentage*hp));
+          opponent.hit(
+            current,
+            Math.round(modifier*percentage*hp),
+            Math.round(percentage*hp)
+          );
           return state;
         }
       }
@@ -48,12 +52,12 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
       case "APPLY_SPELL_DEFLECT": {
         float percentage = (float) spell.getBaseDamage() / 100;
         int sum = current.getPlainHits().stream().mapToInt(Integer::intValue).sum();
-        opponent.hit(Math.round(percentage*sum*modifier));
+        opponent.hit(current, Math.round(percentage*sum*modifier));
         return state;
       }
 
       case "APPLY_SPELL_BACKSTAB": {
-        opponent.hit(Math.round(baseDamage*modifier), baseDamage);
+        opponent.hit(current, Math.round(baseDamage*modifier), baseDamage);
         return state;
       }
 
@@ -66,10 +70,11 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
         } else {
           rounds = ((Double) options.get("rounds")).intValue();
         }
-        opponent.hit(damage, baseDamage);
+
+        opponent.hit(current, damage, baseDamage);
         opponent.freeze(rounds);
         for(int i=0;i<rounds;i++) {
-          opponent.hitWithDelay(damage);
+          opponent.hitWithDelay(current, damage);
         }
         return state;
       }
