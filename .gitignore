@@ -2,3 +2,6 @@
 ./checkstyle.txt
 META-INF
 com
+a
+b
+checker/resources/out

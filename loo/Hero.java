@@ -12,12 +12,12 @@ public final class Hero {
   private int experience;
   private int frozenRounds;
   private List<Spell> spells;
-  private List<Spell> hits;
+  private List<Integer> plainHits;
   private List<Integer> delayedHits;
 
   Hero() {
     this.delayedHits = new ArrayList<Integer>();
-    this.hits = new ArrayList<Spell>();
+    this.plainHits = new ArrayList<Integer>();
     this.experience = 0;
     this.level = 0;
     this.frozenRounds = 0;
@@ -42,13 +42,13 @@ public final class Hero {
     this.frozenRounds = rounds;
   }
 
-  public void hit(Spell spell, int damage) {
-    this.hits.add(spell);
+  public void hit(int damage, int plainDamage) {
+    this.plainHits.add(plainDamage);
     this.currentHP -= damage;
   }
 
-  public void clearHits() {
-    this.hits.clear();
+  public void clearPlainHits() {
+    this.plainHits.clear();
   }
 
   public void hit(int damage) {
@@ -71,8 +71,8 @@ public final class Hero {
     return this.currentHP;
   }
 
-  public List<Spell> getHits() {
-    return this.hits;
+  public List<Integer> getPlainHits() {
+    return this.plainHits;
   }
 
   public int geHero() {

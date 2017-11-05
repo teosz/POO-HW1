@@ -21,7 +21,7 @@ public final class RoundManagement implements Reducer<List<StateCell>> {
           .filter(hero -> hero.getDelayedHits().size() > 0)
           .collect(Collectors.toList());
         heros.forEach(hero -> hero.hit(hero.popDelayedHit()));
-        heros.forEach(hero -> hero.clearHits());
+        heros.forEach(hero -> hero.clearPlainHits());
         return state;
       case Actions.END_ROUND:
         return state;

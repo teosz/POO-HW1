@@ -37,21 +37,23 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
     Map options = spell.getOptions();
     switch (action.getType()) {
       case "APPLY_SPELL_DRAIN": {
-        float hp = Math.min(new Float(0.3) * opponent.getBaseHP(), opponent.getCurrentHP());
-        float percentage = (float) baseDamage / 100;
-        opponent.hit(spell, Math.round(modifier*percentage*hp));
-        return state;
+        if(modifier != 0) {
+          float hp = Math.min(new Float(0.3) * opponent.getBaseHP(), opponent.getCurrentHP());
+          float percentage = (float) baseDamage / 100;
+          opponent.hit(Math.round(modifier*percentage*hp), Math.round(percentage*hp));
+          return state;
+        }
       }
 
       case "APPLY_SPELL_DEFLECT": {
         float percentage = (float) spell.getBaseDamage() / 100;
-        int sum = current.getHits().stream().mapToInt(x -> x.getBaseDamage()).sum();
-        opponent.hit(spell, Math.round(percentage*sum*modifier));
+        int sum = current.getPlainHits().stream().mapToInt(Integer::intValue).sum();
+        opponent.hit(Math.round(percentage*sum*modifier));
         return state;
       }
 
       case "APPLY_SPELL_BACKSTAB": {
-        opponent.hit(spell, Math.round(baseDamage*modifier));
+        opponent.hit(Math.round(baseDamage*modifier), baseDamage);
         return state;
       }
 
@@ -64,7 +66,7 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
         } else {
           rounds = ((Double) options.get("rounds")).intValue();
         }
-        opponent.hit(spell, damage);
+        opponent.hit(damage, baseDamage);
         opponent.freeze(rounds);
         for(int i=0;i<rounds;i++) {
           opponent.hitWithDelay(damage);

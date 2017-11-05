@@ -24,8 +24,13 @@ public class Spell {
   }
 
   public float getModifier(Hero hero) {
-    double modifier = (double) this.modifiers.get(hero.getType());
-    return (float) modifier / 100;
+    String key = hero.getType();
+    if(this.modifiers.containsKey(key)) {
+      double modifier = (double) this.modifiers.get(key);
+      return (float) modifier / 100;
+
+    }
+    return 0;
   }
 
   public String toString() {
