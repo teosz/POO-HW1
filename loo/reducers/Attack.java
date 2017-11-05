@@ -12,7 +12,6 @@ import java.lang.Math;
 public final class Attack implements Reducer<List<StateCell>> {
   @Override
   public List<StateCell> reduce(final List<StateCell> state, final Action action) {
-    System.out.println(action);
     Map payload = action.getPayload();
     Spell spell = Spell.fromObject(payload.get("spell"));
     Hero opponent = Hero.fromObject(payload.get("opponent"));

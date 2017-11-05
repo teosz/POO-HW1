@@ -6,6 +6,7 @@ import statecontainer.Payload;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.util.Map;
 import java.util.HashMap;
 import com.google.gson.JsonObject;
@@ -28,79 +29,71 @@ public final class Game {
 
         terrianType.put(new Point(i,j), terrianMatrix.get(i).charAt(j));
       }
-    System.out.println(terrianType);
+    // System.out.println(terrianType);
   }
 
   public void addHero(final char heroSymbol, final Point position) {
     Hero hero = this.heroFactory.create(heroSymbol);
-    this.store.dispatch(ActionsCreator.createAddHeroAction(hero, position));
-  }
-  private List<Action> computeAction(final List<StateCell> list) {
-    System.out.println(list);
-    List<Action> actions = new ArrayList<Action>();
-    for (StateCell current : list) {
-      for (StateCell opponent : list) {
-          Hero currentHero = current.getHero();
-          Hero opponentHero = opponent.getHero();
-          if(currentHero != opponentHero) {
-          Character terrian = this.terrianType.get(current.getPosition());
-          actions.addAll(
-            currentHero.getSpells()
-            .stream()
-            .map(x ->
-            ActionsCreator.createApplySpellAction(x, currentHero, opponentHero, terrian)
-            ).collect(Collectors.toList())
-          );
-
-        }
-      }
-    }
-    //add start battle
-    Action action = actions.stream().filter(x -> x.getType().equals("APPLY_SPELL_DEFLECT")).collect(Collectors.toList()).get(0);
-    actions.add(actions.remove(actions.indexOf(action)));
-    //add end battle
-    return actions;
-  }
-
-  private List<Action> computeActions(List<StateCell> state) {
-    return state.stream()
-      .collect(Collectors.groupingBy(StateCell::getPosition))
-      .entrySet()
-      .stream()
-      .filter(entry -> (entry.getValue().size() > 1))
-      .flatMap(entry -> computeAction(entry.getValue()).stream())
-      .collect(Collectors.toList());
+    Action action = ActionCreator.addHero(hero, position);
+    this.store.dispatch(action);
   }
 
   @SuppressWarnings("unchecked")
   private List<StateCell> getState() {
     return (List<StateCell>) this.store.getState();
   }
+
+  private List<Hero> getHeros(final List<StateCell> cells) {
+    return cells.stream()
+      .map(StateCell::getHero)
+      .collect(Collectors.toList());
+  }
+
+
+  private List<Action> getBattleActions(final Point position, final List<StateCell> list) {
+    List<Hero> heros = this.getHeros(list);
+    Character terrian = this.terrianType.get(position);
+    List<Action> actions = ActionCreator.spellFromHeros(heros, terrian);
+    Action action = actions.stream().filter(x -> x.getType().equals("APPLY_SPELL_DEFLECT")).collect(Collectors.toList()).get(0);
+    actions.add(actions.remove(actions.indexOf(action)));
+    return wrapActions(
+      ActionCreator.startBattle(),
+      actions,
+      ActionCreator.endBattle()
+    );
+  }
+
+  private List<Action> getRoundActions(List<StateCell> state) {
+    return state.stream()
+      .collect(Collectors.groupingBy(StateCell::getPosition))
+      .entrySet()
+      .stream()
+      .filter(entry -> (entry.getValue().size() > 1))
+      .flatMap(entry ->
+        getBattleActions(
+          entry.getKey(),
+          entry.getValue()
+        ).stream()
+      )
+      .collect(Collectors.toList());
+  }
+
+  private List<Action> wrapActions(Action start, List<Action> mids, Action end) {
+    List<Action> actions = new ArrayList<Action>();
+    actions.add(start);
+    actions.addAll(mids);
+    actions.add(end);
+    return actions;
+
+  }
+
   public void startRound(final char move) {
     List<StateCell> state = this.getState();
-    List<Action> actions = this.computeActions(state);
+    List<Action> actions = wrapActions(
+      ActionCreator.startRound(),
+      this.getRoundActions(state),
+      ActionCreator.endRound()
+    );
     this.store.dispatch(actions);
-  }
-}
-
-class ActionsCreator {
-  public static Action createAddHeroAction(Hero hero, Point position) {
-    Map<String, Object> payload = new HashMap<String, Object>();
-    payload.put("hero", hero);
-    payload.put("position", position);
-    return new Action(
-      Actions.ADD_HERO,
-      payload);
-  }
-
-  public static Action createApplySpellAction(Spell spell, Hero current, Hero opponent, Character terrian) {
-    Map<String, Object> payload = new HashMap<String, Object>();
-    payload.put("current", current);
-    payload.put("opponent", opponent);
-    payload.put("spell", spell);
-    payload.put("terrian", terrian);
-    return new Action(
-      "APPLY_SPELL_"+spell.getName().toUpperCase(),
-      payload);
   }
 }

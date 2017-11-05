@@ -8,6 +8,7 @@ public final class StateCell {
     this.position = position;
   }
 
+
   public Point getPosition() {
     return position;
   }
