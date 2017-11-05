@@ -130,7 +130,9 @@
       "baseDamage": 40,
       "levelupDamage": 10,
       "options": {
-        "rounds": "1"
+        "rounds": 3,
+        "terrainType": "Woods",
+        "terrainValue": 6
       },
       "modifiers": {
         "Rogue":	-10,

@@ -9,6 +9,7 @@ public class Spell {
   private int levelupDamage;
   private Map options;
   private Map modifiers;
+  private Map terrainModifier;
 
   public String getName() {
     return this.name;
@@ -17,7 +18,7 @@ public class Spell {
   public int getBaseDamage() {
     return this.baseDamage;
   }
-  
+
   public Map getOptions() {
     return this.options;
   }

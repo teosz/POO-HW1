@@ -31,6 +31,7 @@ final class Main {
     }
 
     game.startRound('_');
+    game.startRound('_');
     // game.startRound('_');
   }
 }
