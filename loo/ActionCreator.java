@@ -24,7 +24,7 @@ class ActionCreator {
     payload.put("spell", spell);
     payload.put("terrain", terrain);
     return new Action(
-      "APPLY_SPELL_"+spell.getName().toUpperCase(),
+      Actions.getSpellActionType(spell.getName()),
       payload
     );
   }
