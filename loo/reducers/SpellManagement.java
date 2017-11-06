@@ -10,7 +10,7 @@ import java.util.Map;
 import java.lang.Math;
 
 public final class SpellManagement implements Reducer<List<StateCell>> {
-  private int backStabCounter = 0;
+  private static int backStabCounter = 0;
   private String getTerrain(final Character symbol) {
     switch(symbol) {
       case 'L':
@@ -57,6 +57,7 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
       case "APPLY_SPELL_DEFLECT": {
         if(spellModifier != 1.0) {
           int sum = current.getPlainHits().stream().mapToInt(Integer::intValue).sum();
+          System.out.println(Math.round(percentage*sum*totalModifier));
           opponent.hit(current, Math.round(percentage*sum*totalModifier));
         }
         return state;
@@ -73,7 +74,6 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
             backStabCounter = 0;
           }
         }
-        // }
         opponent.hit(current, modifiedDamage, plainDamage);
         this.backStabCounter++;
         return state;
@@ -93,6 +93,24 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
         for(int i=0;i<rounds;i++) {
           opponent.hitWithDelay(current, modifiedDamage);
         }
+        return state;
+      }
+
+      case "APPLY_SPELL_EXECUTE": {
+        int limit = 0;
+        int currentHP = opponent.getCurrentHP();
+        if(currentHP < 0.2*opponent.getBaseHP()) {
+          opponent.hit(current, currentHP, currentHP);
+        } else {
+          opponent.hit(current, modifiedDamage, plainDamage);
+        }
+        return state;
+      }
+
+      case "APPLY_SPELL_SLAM": {
+        int rounds = ((Double) options.get("rounds")).intValue();
+        opponent.hit(current,  modifiedDamage, plainDamage);
+        opponent.freeze(rounds);
         return state;
       }
 

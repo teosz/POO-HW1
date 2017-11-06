@@ -92,7 +92,6 @@ public final class Hero {
     this.plainHits.clear();
   }
 
-
   public void hitWithDelay(Hero author, int damage) {
     this.delayedHits.add(damage);
     this.delayedAuthors.add(author);

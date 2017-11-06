@@ -14,8 +14,15 @@ import java.lang.Math;
 public final class RoundManagement implements Reducer<List<StateCell>> {
   @Override
   public List<StateCell> reduce(final List<StateCell> state, final Action action) {
+    // System.out.println(action);
+    // System.out.println(state);
+
     switch (action.getType()) {
       case Actions.START_ROUND: {
+        state.stream()
+          .map(StateCell::getHero)
+          .filter(Hero::isFrozen)
+          .forEach(hero -> hero.decreseFrozenRounds());
         state.stream()
           .map(StateCell::getHero)
           .filter(hero -> !hero.isDead())
@@ -25,10 +32,6 @@ public final class RoundManagement implements Reducer<List<StateCell>> {
         return state;
       }
       case Actions.END_ROUND:
-        state.stream()
-          .map(StateCell::getHero)
-          .filter(Hero::isFrozen)
-          .forEach(hero -> hero.decreseFrozenRounds());
         state.stream()
           .map(StateCell::getHero)
           .filter(Hero::isDead)

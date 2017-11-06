@@ -36,41 +36,41 @@
     }
   },
   "Knight": {
-    "base_hp": 900,
-    "levelup_hp": 80,
-    "spells": {
-      "execute" : {
-        "base_damage": 150,
-        "levelup_damage": 20,
-        "ondead": {
-          "hp_limit": "MY_LIMIT"
-        },
-        "modifiers": {
-          "Rogue": 15,
-          "Knight": 0,
-          "Pyromancer": 10,
-          "Wizard": -20
-        }
+    "baseHP": 900,
+    "currentHP": 900,
+    "levelupHP": 80,
+    "spells": [{
+      "name": "execute",
+      "baseDamage": 200,
+      "levelupDamage": 30,
+      "options": {
+        "baseLimit": 20,
+        "levelupLimit": 1,
+        "maxim": 40
       },
-      "slim": {
-         "base_damage": 100,
-         "levelup_damage": 40,
-         "behavoirs": [{
-           "type": "FREEZE",
-           "rounds": "1"
-         }],
-         "modifiers": {
-          "Rogue":	-20,
-          "Knight":	20,
-          "Pyromancer":	-10,
-          "Wizard":5
-         }
+      "modifiers": {
+        "Rogue": 15,
+        "Knight": 0,
+        "Pyromancer": 10,
+        "Wizard": -20
       }
-    },
+    }, {
+      "name": "slam",
+       "baseDamage": 100,
+       "levelupDamage": 40,
+       "options": {
+         "rounds": 1
+       },
+       "modifiers": {
+        "Rogue":	-20,
+        "Knight":	20,
+        "Pyromancer":	-10,
+        "Wizard":5
+      }
+    }],
     "ability": {
-      "type": "land",
       "terrain": "Land",
-      "damage": 15
+      "modifier": 15
     }
   },
   "Wizard": {
@@ -120,7 +120,7 @@
       },
       "modifiers": {
         "Rogue":	20,
-        "Knight":	10,
+        "Knight":	-10,
         "Pyromancer":	25,
         "Wizard":	25
       }

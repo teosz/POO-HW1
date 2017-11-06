@@ -32,6 +32,8 @@ final class HeroFactory {
         return 'W';
       case "Rogue":
         return 'R';
+      case "Knight":
+        return 'K';
       default:
         return ' ';
     }
@@ -42,6 +44,8 @@ final class HeroFactory {
         return "Wizard";
       case 'R':
         return "Rogue";
+      case 'K':
+        return "Knight";
       default:
         return "";
     }
