@@ -5,7 +5,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public final class FileManager {
-    public static String getContent(String path) {
+    private FileManager() {
+
+    }
+    public static String getContent(final String path) {
       try {
         return new String(Files.readAllBytes(Paths.get(path)));
       } catch (IOException e) {

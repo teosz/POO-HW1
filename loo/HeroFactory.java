@@ -5,7 +5,7 @@ import com.google.gson.Gson;
 /**
   * Class providing the functionality to create new Heros.
   */
-final public class HeroFactory {
+public final class HeroFactory {
   private final JsonObject builders;
 
   /**

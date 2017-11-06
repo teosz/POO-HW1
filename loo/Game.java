@@ -48,7 +48,7 @@ public final class Game {
 
 
   /**
-    * Create JsonObject defening all the heros and their specifications
+    * Create JsonObject defening all the heros and their specifications.
     * @return JsonObject config
     */
   private JsonObject createConfig() {
@@ -57,7 +57,7 @@ public final class Game {
   }
 
   /**
-    * Create a mapping between all the Points and thier type
+    * Create a mapping between all the Points and thier type.
     * @return Map terrian
     */
   private Map<Point, Character> createTerrain(final int mapWidth,
@@ -75,7 +75,7 @@ public final class Game {
   }
 
   /**
-    * get the game current state
+    * get the game current state.
     * @return State
     */
   @SuppressWarnings("unchecked")
@@ -84,7 +84,7 @@ public final class Game {
   }
 
   /**
-    * get all the hero on the map
+    * get all the hero on the map.
     * @param cells current state
     * @return all the heros on map
     */
@@ -95,7 +95,7 @@ public final class Game {
   }
 
   /**
-    * Wraps a list of actions between other actions
+    * Wraps a list of actions between other actions.
     * @param start first action
     * @param mids list of actions
     * @param end last action
@@ -110,7 +110,7 @@ public final class Game {
   }
 
   /**
-    * Prioritize a list of actions
+    * Prioritize a list of actions.
     * Deflect action is dependent on other heros actions it will be always at the end.
     * @return list of actions ending with defelect if exists.
     */
@@ -128,7 +128,7 @@ public final class Game {
   }
 
   /**
-    * Return all the action made by a list of heros if they are placed at a given postion
+    * Return all the action made by a list of heros if they are placed at a given postion.
     * @param position the position of the heros
     * @param heros list of heros
     * @return the list of actions
@@ -146,7 +146,7 @@ public final class Game {
 
 
   /**
-    * Return all the actions for a round made by all the heros
+    * Return all the actions for a round made by all the heros.
     * @param state game state
     * @return the list of actions
     */
@@ -190,7 +190,7 @@ public final class Game {
 
 
 /**
-  * @return all the stats for the current state
+  * @return all the stats for the current state.
   */
   public String getGameStats() {
     return this.getState()

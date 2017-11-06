@@ -8,15 +8,18 @@ import java.util.List;
 
 public final class Combined implements Reducer<List<StateCell>> {
   @Override
-  public List<StateCell> reduce(List<StateCell> state, final Action action) {
-    if(Actions.isApplySpellAction(action.getType()))
+  public List<StateCell> reduce(final List<StateCell> state, final Action action) {
+    if (Actions.isApplySpellAction(action.getType())) {
       return new SpellManagement().reduce(state, action);
+    }
 
-    if(Actions.isRoundAction(action.getType()))
+    if (Actions.isRoundAction(action.getType())) {
       return new RoundManagement().reduce(state, action);
+    }
 
-    if(Actions.isMapAction(action.getType()))
+    if (Actions.isMapAction(action.getType())) {
       return new MapManagement().reduce(state, action);
+    }
 
     return state;
   }

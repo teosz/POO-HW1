@@ -1,15 +1,11 @@
 package loo.reducers;
 
 import loo.StateCell;
-import loo.Spell;
 import loo.Hero;
 import loo.Actions;
 import statecontainer.Reducer;
 import statecontainer.Action;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.lang.Math;
 
 public final class RoundManagement implements Reducer<List<StateCell>> {
   @Override
@@ -18,7 +14,7 @@ public final class RoundManagement implements Reducer<List<StateCell>> {
     // System.out.println(state);
 
     switch (action.getType()) {
-      case Actions.START_ROUND: {
+      case Actions.START_ROUND:
         state.stream()
           .map(StateCell::getHero)
           .filter(Hero::isFrozen)
@@ -33,7 +29,6 @@ public final class RoundManagement implements Reducer<List<StateCell>> {
           .filter(hero -> !hero.isDead())
           .forEach(hero -> hero.clearPlainHits());
         return state;
-      }
       case Actions.END_ROUND:
         state.stream()
           .map(StateCell::getHero)
