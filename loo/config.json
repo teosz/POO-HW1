@@ -18,6 +18,7 @@
       "baseDamage": 150,
       "levelupDamage": 20,
       "options": {
+        "damage": 50,
         "rounds": 2
       },
       "modifiers": {

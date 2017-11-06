@@ -18,7 +18,7 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
     Hero current = Hero.fromObject(payload.get("current"));
     String terrain = Symbols.getTerrain(Character.class.cast(payload.get("terrain")));
     Map options = spell.getOptions();
-    float terrainModifier = new Float(1.0);
+    float terrainModifier = 1.0f;
     int baseDamage = spell.getBaseDamage();
     float spellModifier = 1 + spell.getModifier(opponent);
     float percentage = (float) baseDamage / 100;
@@ -31,7 +31,7 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
     int modifiedDamage = Math.round(baseDamage * totalModifier);
     switch (action.getType()) {
       case "APPLY_SPELL_DRAIN":
-        float hp = Math.min(new Float(0.3) * opponent.getBaseHP(), opponent.getCurrentHP());
+        float hp = Math.min(0.3f * opponent.getBaseHP(), opponent.getCurrentHP());
         opponent.hit(
           current,
           Math.round(totalModifier * percentage * hp),
@@ -80,7 +80,7 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
       case "APPLY_SPELL_EXECUTE":
         int limit = 0;
         int currentHP = opponent.getCurrentHP();
-        if (currentHP < 0.2 * opponent.getBaseHP()) {
+        if (currentHP < 0.2f * opponent.getBaseHP()) {
           opponent.hit(current, currentHP, currentHP);
         } else {
           opponent.hit(current, modifiedDamage, plainDamage);
@@ -98,7 +98,9 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
 
       case "APPLY_SPELL_IGNITE":
         opponent.hit(current,  modifiedDamage, plainDamage);
-        for (int i = 0; i <= 1; i++) {
+        int attack = ((Double) options.get("damage")).intValue();
+        int roundsD = ((Double) options.get("rounds")).intValue();
+        for (int i = 0; i < roundsD ; i++) {
           opponent.hitWithDelay(Math.round(50 * totalModifier));
         }
         return state;
