@@ -76,7 +76,6 @@ function checkBonus
 
 function calculateScore
 {
-	echo -ne "Passed $GOOD_TESTS\n";
 	GOOD_TESTS=$((60-GOOD_TESTS*6/10))
 
 	GOOD_TESTS=`echo "scale=2; $GOOD_TESTS" | bc -l`
@@ -89,11 +88,11 @@ function calculateScore
 ## MAIN EXECUTION ##
 cleanHomework
 compileHomework
-#
-# checkTest "3x3"
-# checkTest "4x4"
-# checkTest "5x5"
-# checkTest "dense"
+
+checkTest "3x3"
+checkTest "4x4"
+checkTest "5x5"
+checkTest "dense"
 checkTest "fightKKD"
 checkTest "fightKKL"
 checkTest "fightKKV"

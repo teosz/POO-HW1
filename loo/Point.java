@@ -57,7 +57,9 @@ public final class Point {
 
     @Override
     public int hashCode() {
-      return Integer.valueOf(String.valueOf(this.x) + String.valueOf(this.y));
+      int result = x;
+      result = 31 * result + y;
+      return result;
     }
 
     @Override

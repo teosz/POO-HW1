@@ -147,6 +147,13 @@ public final class Hero {
   }
 
   /**
+  * Clean the list of the delayed hits.
+  */
+  public void cleanDelayedHits() {
+    this.delayedHits.clear();
+  }
+
+  /**
   * Hit with damage which will be aplied in future round.
   * @param damage damage of hit
   */

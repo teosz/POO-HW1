@@ -32,7 +32,6 @@ public final class RoundManagement implements Reducer<List<StateCell>> {
       case Actions.END_ROUND:
         state.stream()
           .map(StateCell::getHero)
-          .filter(Hero::isDead)
           .filter(Hero::hasKiller)
           .peek(hero -> hero.getKiller().increaseXP(hero.getLevel()))
           .peek(hero -> hero.getKiller().levelUP())

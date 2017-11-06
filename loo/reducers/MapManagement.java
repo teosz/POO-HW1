@@ -17,9 +17,9 @@ public final class MapManagement implements Reducer<List<StateCell>> {
       case 'R':
         return new Point(0, 1);
       case 'U':
-        return new Point(1, 0);
-      case 'D':
         return new Point(-1, 0);
+      case 'D':
+        return new Point(1, 0);
       default:
         return new Point(0, 0);
     }
