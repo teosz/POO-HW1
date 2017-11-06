@@ -39,7 +39,7 @@ public final class Hero {
 
 
   /**
-    * Cast a hero form Object.
+    * Cast a hero from Object.
     * @param hero object to be casted
     * @return object casted into a Hero
     */

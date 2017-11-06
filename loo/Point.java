@@ -1,25 +1,48 @@
 package loo;
-
+/**
+  * Class providing the functionality to with cartesian coordinates.
+  */
 public final class Point {
     private int x, y;
+
+    /**
+    * @param x the X coordinate
+    * @param y the Y coordinate
+    */
     public Point(final int x, final int y) {
       this.x = x;
       this.y = y;
     }
 
+    /**
+    * @return the X of the point
+    */
     public int getX() {
       return this.x;
     }
 
+    /**
+    * @return the Y of the point
+    */
     public int getY() {
       return this.y;
     }
 
-    public void add(Point a) {
-      this.x += a.getX();
-      this.y += a.getY();
+    /**
+    * Add two points together.
+    * @param term the Point to add
+    */
+    public void add(final Point term) {
+      this.x += term.getX();
+      this.y += term.getY();
     }
-    public static Point fromObject(Object point) {
+
+    /**
+      * Cast a point from Object.
+      * @param point object to be casted
+      * @return object casted into a Point
+      */
+    public static Point fromObject(final Object point) {
       return Point.class.cast(point);
     }
 

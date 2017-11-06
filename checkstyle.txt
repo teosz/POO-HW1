@@ -81,16 +81,7 @@ Starting audit...
 [ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/MapManagement.java:24:28: ',' is not followed by whitespace. [WhitespaceAfter]
 [ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/MapManagement.java:39:12: 'for' is not followed by whitespace. [WhitespaceAround]
 [ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/MapManagement.java:41:13: 'if' is not followed by whitespace. [WhitespaceAround]
-[ERROR] /home/teosz/Courses/2/POO/HW1/loo/Hero.java:117: First sentence should end with a period. [JavadocStyle]
-[ERROR] /home/teosz/Courses/2/POO/HW1/loo/Hero.java:125: First sentence should end with a period. [JavadocStyle]
-[ERROR] /home/teosz/Courses/2/POO/HW1/loo/Hero.java:134: First sentence should end with a period. [JavadocStyle]
-[ERROR] /home/teosz/Courses/2/POO/HW1/loo/Hero.java:141: First sentence should end with a period. [JavadocStyle]
-[ERROR] /home/teosz/Courses/2/POO/HW1/loo/Hero.java:148: First sentence should end with a period. [JavadocStyle]
-[ERROR] /home/teosz/Courses/2/POO/HW1/loo/Hero.java:156: First sentence should end with a period. [JavadocStyle]
-[ERROR] /home/teosz/Courses/2/POO/HW1/loo/Hero.java:165: First sentence should end with a period. [JavadocStyle]
-[ERROR] /home/teosz/Courses/2/POO/HW1/loo/Hero.java:173: First sentence should end with a period. [JavadocStyle]
-[ERROR] /home/teosz/Courses/2/POO/HW1/loo/Hero.java:181: First sentence should end with a period. [JavadocStyle]
-[ERROR] /home/teosz/Courses/2/POO/HW1/loo/Hero.java:241: First sentence should end with a period. [JavadocStyle]
+[ERROR] /home/teosz/Courses/2/POO/HW1/loo/Hero.java:242: First sentence should end with a period. [JavadocStyle]
 [ERROR] /home/teosz/Courses/2/POO/HW1/loo/Spell.java:2:8: Unused import - java.util.List. [UnusedImports]
 [ERROR] /home/teosz/Courses/2/POO/HW1/loo/Spell.java:14:3: Class 'Spell' looks like designed for extension (can be subclassed), but the method 'getName' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'Spell' final or making the method 'getName' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
 [ERROR] /home/teosz/Courses/2/POO/HW1/loo/Spell.java:18:3: Class 'Spell' looks like designed for extension (can be subclassed), but the method 'getBaseDamage' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'Spell' final or making the method 'getBaseDamage' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
@@ -117,9 +108,6 @@ Starting audit...
 [ERROR] /home/teosz/Courses/2/POO/HW1/loo/ActionCreator.java:20: Line is longer than 100 characters (found 115). [LineLength]
 [ERROR] /home/teosz/Courses/2/POO/HW1/loo/ActionCreator.java:32: Line is longer than 100 characters (found 112). [LineLength]
 [ERROR] /home/teosz/Courses/2/POO/HW1/loo/ActionCreator.java:66:39: Parameter sequence should be final. [FinalParameters]
-[ERROR] /home/teosz/Courses/2/POO/HW1/loo/HeroFactory.java:2:8: Unused import - java.util.Map. [UnusedImports]
-[ERROR] /home/teosz/Courses/2/POO/HW1/loo/HeroFactory.java:9:15: Parameter builders should be final. [FinalParameters]
-[ERROR] /home/teosz/Courses/2/POO/HW1/loo/HeroFactory.java:20:41: Parameter type should be final. [FinalParameters]
 [ERROR] /home/teosz/Courses/2/POO/HW1/loo/Point.java:18:21: Parameter a should be final. [FinalParameters]
 [ERROR] /home/teosz/Courses/2/POO/HW1/loo/Point.java:22:36: Parameter point should be final. [FinalParameters]
 [ERROR] /home/teosz/Courses/2/POO/HW1/main/Main.java:21:8: 'for' is not followed by whitespace. [WhitespaceAround]
@@ -146,4 +134,4 @@ Starting audit...
 [ERROR] /home/teosz/Courses/2/POO/HW1/util/FileManager.java:7:1: Utility classes should not have a public or default constructor. [HideUtilityClassConstructor]
 [ERROR] /home/teosz/Courses/2/POO/HW1/util/FileManager.java:8:37: Parameter path should be final. [FinalParameters]
 Audit done.
-Checkstyle ends with 146 errors.
+Checkstyle ends with 134 errors.

@@ -1,15 +1,26 @@
 package loo;
-import java.util.Map;
 import com.google.gson.JsonObject;
 import com.google.gson.Gson;
 
-final class HeroFactory {
-  private JsonObject builders;
+/**
+  * Class providing the functionality to create new Heros.
+  */
+final public class HeroFactory {
+  private final JsonObject builders;
 
-  HeroFactory(JsonObject builders) {
+  /**
+    * Initialize new hero factory.
+    * @param builders mapping of hero type to hero's builder
+    */
+  HeroFactory(final JsonObject builders) {
     this.builders = builders;
   }
 
+  /**
+    * Create new hero.
+    * @param heroSymbol symbolizing the type of the Hero
+    * @return hero
+    */
   public Hero create(final char heroSymbol) {
     return new Gson().fromJson(
       getBuilderFromType(getTypeFromSymbol(heroSymbol)),
@@ -17,7 +28,12 @@ final class HeroFactory {
     );
   }
 
-  private JsonObject getBuilderFromType(String type) {
+  /**
+    * Get hero builder from a specific type.
+    * @param type hero type
+    * @return JsonObject with the build options
+    */
+  private JsonObject getBuilderFromType(final String type) {
     JsonObject builder = new Gson().fromJson(
       this.builders.get(type),
       JsonObject.class
@@ -26,6 +42,7 @@ final class HeroFactory {
     return builder;
 
   }
+
   public static char getSymbolFromType(final String type) {
     switch (type) {
       case "Wizard":
@@ -40,6 +57,7 @@ final class HeroFactory {
         return ' ';
     }
   }
+
   private static String getTypeFromSymbol(final char heroSymbol) {
     switch (heroSymbol) {
       case 'W':
