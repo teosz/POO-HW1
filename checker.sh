@@ -134,6 +134,7 @@ compileHomework
 # checkTest "fightRPL"
 # checkTest "fightRPV"
 # checkTest "fightRPW"
+
 checkTest "fightRRD"
 checkTest "fightRRL"
 checkTest "fightRRV"
@@ -142,6 +143,7 @@ checkTest "fightRWD"
 checkTest "fightRWL"
 checkTest "fightRWV"
 checkTest "fightRWW"
+
 # checkTest "fightWKD"
 # checkTest "fightWKL"
 # checkTest "fightWKV"
@@ -150,6 +152,7 @@ checkTest "fightRWW"
 # checkTest "fightWPL"
 # checkTest "fightWPV"
 # checkTest "fightWPW"
+
 checkTest "fightWRD"
 checkTest "fightWRL"
 checkTest "fightWRV"

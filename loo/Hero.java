@@ -79,6 +79,15 @@ public final class Hero {
       this.killer = author;
   }
 
+  public boolean hasKiller() {
+    return this.killer != null;
+  }
+
+  public void removeKiller() {
+    System.out.println("Getting call");
+    this.killer = null;
+  }
+
   public void clearPlainHits() {
     this.plainHits.clear();
   }

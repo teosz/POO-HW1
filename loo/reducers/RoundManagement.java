@@ -18,6 +18,7 @@ public final class RoundManagement implements Reducer<List<StateCell>> {
       case Actions.START_ROUND: {
         state.stream()
           .map(StateCell::getHero)
+          .filter(hero -> !hero.isDead())
           .filter(hero -> hero.getDelayedHits().size() > 0)
           .peek(hero -> hero.hit(hero.popDelayedAuthor(), hero.popDelayedHit()))
           .forEach(hero -> hero.clearPlainHits());
@@ -31,8 +32,10 @@ public final class RoundManagement implements Reducer<List<StateCell>> {
         state.stream()
           .map(StateCell::getHero)
           .filter(Hero::isDead)
+          .filter(Hero::hasKiller)
           .peek(hero -> hero.getKiller().increaseXP(hero.getLevel()))
-          .forEach(hero -> hero.levelUP());
+          .peek(hero -> hero.getKiller().levelUP())
+          .forEach(hero -> hero.removeKiller());
         return state;
       default:
         return state;

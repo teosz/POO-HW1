@@ -114,9 +114,9 @@
       "baseDamage": 200,
       "levelupDamage": 20,
       "options": {
-        "charge_rounds": 3,
+        "chargeRounds": 3,
         "scale": 1.5,
-        "terrain": "Wood"
+        "terrain": "Woods"
       },
       "modifiers": {
         "Rogue":	20,
