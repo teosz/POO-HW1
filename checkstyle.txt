@@ -1,8 +1,8 @@
 Starting audit...
 [ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/SpellManagement.java:24:45: '100' is a magic number. [MagicNumber]
 [ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/SpellManagement.java:34:39: '0.3' is a magic number. [MagicNumber]
-[ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/SpellManagement.java:84:25: '0.2' is a magic number. [MagicNumber]
-[ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/SpellManagement.java:103:44: '50' is a magic number. [MagicNumber]
+[ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/SpellManagement.java:83:25: '0.2' is a magic number. [MagicNumber]
+[ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/SpellManagement.java:102:44: '50' is a magic number. [MagicNumber]
 [ERROR] /home/teosz/Courses/2/POO/HW1/loo/Constants.java:3:1: Utility classes should not have a public or default constructor. [HideUtilityClassConstructor]
 Audit done.
 Checkstyle ends with 5 errors.

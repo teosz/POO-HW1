@@ -99,11 +99,12 @@ public final class Hero {
   * Increase the current level if possible.
   */
   public void levelUP() {
-    if (this.getLevel() * LEVEL_UP_EXPERINCE_MULTLIPLIER > LEVEL_UP_EXPERINCE) {
+    if (this.experience >= this.getLevel() * LEVEL_UP_EXPERINCE_MULTLIPLIER + LEVEL_UP_EXPERINCE) {
       this.baseHP += this.levelupHP;
       this.currentHP = this.baseHP;
       this.spells.stream().forEach(spell -> spell.levelUP());
       this.level++;
+      this.levelUP();
     }
   }
 

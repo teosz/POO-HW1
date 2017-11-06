@@ -182,9 +182,9 @@ public final class Game {
     */
   public void startRound(final String moveSequence) {
     List<StateCell> state = this.getState();
+    this.store.dispatch(ActionCreator.moveBySequence(moveSequence));
     this.store.dispatch(ActionCreator.startRound());
     this.store.dispatch(this.getRoundActions(state));
-    this.store.dispatch(ActionCreator.moveBySequence(moveSequence));
     this.store.dispatch(ActionCreator.endRound());
   }
 

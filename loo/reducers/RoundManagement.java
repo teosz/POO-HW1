@@ -10,9 +10,6 @@ import java.util.List;
 public final class RoundManagement implements Reducer<List<StateCell>> {
   @Override
   public List<StateCell> reduce(final List<StateCell> state, final Action action) {
-    // System.out.println(action);
-    // System.out.println(state);
-
     switch (action.getType()) {
       case Actions.START_ROUND:
         state.stream()
@@ -33,6 +30,7 @@ public final class RoundManagement implements Reducer<List<StateCell>> {
         state.stream()
           .map(StateCell::getHero)
           .filter(Hero::hasKiller)
+          .filter(hero -> !hero.getKiller().isDead())
           .peek(hero -> hero.getKiller().increaseXP(hero.getLevel()))
           .peek(hero -> hero.getKiller().levelUP())
           .forEach(hero -> hero.removeKiller());
