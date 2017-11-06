@@ -78,7 +78,9 @@ public final class Hero {
     if(this.isDead())
       this.killer = author;
   }
-
+  public void hit(int damage) {
+    this.currentHP -= damage;
+  }
   public boolean hasKiller() {
     return this.killer != null;
   }

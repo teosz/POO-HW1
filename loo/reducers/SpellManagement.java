@@ -114,6 +114,21 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
         return state;
       }
 
+      case "APPLY_SPELL_FIREBLAST": {
+        opponent.hit(current,  modifiedDamage, plainDamage);
+        return state;
+      }
+
+      case "APPLY_SPELL_IGNITE": {
+        opponent.hit(current,  modifiedDamage, plainDamage);
+        for(int i=0;i<=1;i++) {
+          opponent.hitWithDelay(current, Math.round(50*totalModifier));
+        }
+        return state;
+      }
+
+
+
       default:
         return state;
     }

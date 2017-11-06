@@ -27,7 +27,7 @@ public final class RoundManagement implements Reducer<List<StateCell>> {
           .map(StateCell::getHero)
           .filter(hero -> !hero.isDead())
           .filter(hero -> hero.getDelayedHits().size() > 0)
-          .forEach(hero -> hero.hit(hero.popDelayedAuthor(), hero.popDelayedHit()));
+          .forEach(hero -> hero.hit(hero.popDelayedHit()));
         state.stream()
           .map(StateCell::getHero)
           .filter(hero -> !hero.isDead())

@@ -1,38 +1,35 @@
 {
   "Pyromancer": {
-    "base_hp": 500,
-    "levelup_hp": 50,
-    "spells": {
-      "fireblast": {
-        "base_damage": 350,
-        "levelup_damage": 50,
-        "modifiers": {
-          "Pyromancer":	-10,
-          "Wizard":	5,
-          "Knight": 20,
-          "Rogue": -20
-        }
-      },
-      "ignite": {
-        "base_damage": 150,
-        "levelup_damage": 20,
-        "per_round": {
-          "numOfRounds": 2,
-          "base_damage": 150,
-          "levelup_damage": 20
-        },
-        "modifiers": {
-          "Rogue": -20,
-          "Knight": 20,
-          "Pyromancer": -10,
-          "Wizard": 5
-        }
+    "baseHP": 500,
+    "currentHP": 500,
+    "levelupHP": 50,
+    "spells": [{
+      "name": "fireblast",
+      "baseDamage": 350,
+      "levelupDamage": 50,
+      "modifiers": {
+        "Pyromancer":	-10,
+        "Wizard":	5,
+        "Knight": 20,
+        "Rogue": -20
       }
-    },
+    }, {
+      "name": "ignite",
+      "baseDamage": 150,
+      "levelupDamage": 20,
+      "options": {
+        "rounds": 2
+      },
+      "modifiers": {
+        "Rogue": -20,
+        "Knight": 20,
+        "Pyromancer": -10,
+        "Wizard": 5
+      }
+    }],
     "ability": {
-      "type": "land",
       "terrain": "Volcanic",
-      "damage": 25
+      "modifier": 25
     }
   },
   "Knight": {
