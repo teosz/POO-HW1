@@ -9,7 +9,7 @@ import statecontainer.Action;
 import java.util.Map;
 import java.util.List;
 
-public final class MapReducer implements Reducer<List<StateCell>> {
+public final class MapManagement implements Reducer<List<StateCell>> {
   private Point getMoveBy(Character s) {
     switch(s) {
       case 'L':
@@ -30,7 +30,7 @@ public final class MapReducer implements Reducer<List<StateCell>> {
     Map payload = action.getPayload();
     switch (action.getType()) {
       case Actions.ADD_HERO:
-      Hero hero = Hero.fromObject(payload.get("hero"));
+        Hero hero = Hero.fromObject(payload.get("hero"));
         Point position = Point.fromObject(payload.get("position"));
         state.add(new StateCell(hero, position));
         return state;

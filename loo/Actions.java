@@ -1,5 +1,11 @@
 package loo;
 
+
+/**
+  * This class consists exclusively of static methods that operate on or return
+  * an action type and action types String CONSTANTS.
+  * @see Action
+  */
 public final class Actions {
   private Actions() {
 
@@ -18,5 +24,13 @@ public final class Actions {
 
   public static final boolean isApplySpellAction(String actionType) {
     return actionType.startsWith(APPLY_SPELL_PREFIX);
+  }
+
+  public static final boolean isRoundAction(String actionType) {
+    return actionType == START_ROUND || actionType == END_ROUND;
+  }
+
+  public static final boolean isMapAction(String actionType) {
+    return actionType == MOVE_BY_SEQUENCE || actionType == ADD_HERO;
   }
 }
