@@ -57,7 +57,7 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
       case "APPLY_SPELL_DEFLECT": {
         if(spellModifier != 1.0) {
           int sum = current.getPlainHits().stream().mapToInt(Integer::intValue).sum();
-          System.out.println(Math.round(percentage*sum*totalModifier));
+          System.out.println(current.getPlainHits());
           opponent.hit(current, Math.round(percentage*sum*totalModifier));
         }
         return state;

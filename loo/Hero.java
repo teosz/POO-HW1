@@ -89,7 +89,10 @@ public final class Hero {
   }
 
   public void clearPlainHits() {
+    System.out.println("here2");
+    System.out.println(this.plainHits);
     this.plainHits.clear();
+    System.out.println(this.plainHits);
   }
 
   public void hitWithDelay(Hero author, int damage) {
