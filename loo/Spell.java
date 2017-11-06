@@ -46,6 +46,9 @@ public final class Spell {
     return 0;
   }
 
+  public void levelUP() {
+    this.baseDamage += this.levelupDamage;
+  }
 
   /**
     * Cast a spell from Object.

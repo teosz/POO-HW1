@@ -10,6 +10,8 @@ public final class Hero {
   private static final int FROM_PROCENT = 100;
   private static final int LEVEL_UP_LIMIT = 200;
   private static final int LEVEL_MULTIPLIER = 40;
+  private static final int LEVEL_UP_EXPERINCE = 250;
+  private static final int LEVEL_UP_EXPERINCE_MULTLIPLIER = 50;
 
   private String type;
   private int baseHP;
@@ -47,7 +49,6 @@ public final class Hero {
     return Hero.class.cast(hero);
   }
 
-
   /**
   * Immobilize the hero for a number of rounds.
   * @param rounds no. of rounds
@@ -71,7 +72,6 @@ public final class Hero {
     this.frozenRounds--;
   }
 
-
   /**
   * Increase the experience of hero.
   * @param looserLevel the level from which the experience is deducted.
@@ -87,9 +87,12 @@ public final class Hero {
   * Increase the current level .
   */
   public void levelUP() {
-    // if (250 + this.get) {
-    //
-    // }
+    if(this.getLevel() * LEVEL_UP_EXPERINCE_MULTLIPLIER > LEVEL_UP_EXPERINCE) {
+      this.baseHP += this.levelupHP;
+      this.currentHP = this.baseHP;
+      this.spells.stream().forEach(spell -> spell.levelUP());
+      this.level++;
+    }
   }
 
   /**
