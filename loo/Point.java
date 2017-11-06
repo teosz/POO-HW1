@@ -1,6 +1,6 @@
 package loo;
 /**
-  * Class providing the functionality to with cartesian coordinates.
+  * Class providing the functionality to work with cartesian coordinates.
   */
 public final class Point {
     private int x, y;
