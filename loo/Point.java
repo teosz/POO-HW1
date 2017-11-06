@@ -4,6 +4,7 @@ package loo;
   */
 public final class Point {
     private int x, y;
+    private static final int PRIME = 31;
 
     /**
     * @param x the X coordinate
@@ -58,7 +59,7 @@ public final class Point {
     @Override
     public int hashCode() {
       int result = x;
-      result = 31 * result + y;
+      result = PRIME * result + y;
       return result;
     }
 

@@ -33,7 +33,7 @@ public final class Spell {
   }
 
   /**
-    * Get the damage modifier when the spell is applied to other hero
+    * Get the damage modifier when the spell is applied to other hero.
     * @param hero the hero which is attacked
     * @return modifier modifier of the damage
     */
@@ -41,11 +41,14 @@ public final class Spell {
     String key = hero.getType();
     if (this.modifiers.containsKey(key)) {
       double modifier = (double) this.modifiers.get(key);
-      return (float) modifier / 100;
+      return (float) modifier / Constants.FROM_PROCENT;
     }
     return 0;
   }
 
+  /**
+    * Increase the damage on levelUP.
+    */
   public void levelUP() {
     this.baseDamage += this.levelupDamage;
   }

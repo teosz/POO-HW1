@@ -3,6 +3,7 @@ package loo.reducers;
 import loo.StateCell;
 import loo.Spell;
 import loo.Hero;
+import loo.Symbols;
 import statecontainer.Reducer;
 import statecontainer.Action;
 import java.util.List;
@@ -10,28 +11,13 @@ import java.util.Map;
 
 public final class SpellManagement implements Reducer<List<StateCell>> {
   private static int backStabCounter = 0;
-  private String getTerrain(final Character symbol) {
-    switch (symbol) {
-      case 'L':
-        return "Land";
-      case 'V':
-        return "Volcanic";
-      case 'D':
-        return "Desert";
-      case 'W':
-        return "Woods";
-      default:
-        return "";
-    }
-  }
-
   @Override
   public List<StateCell> reduce(final List<StateCell> state, final Action action) {
     Map payload = action.getPayload();
     Spell spell = Spell.fromObject(payload.get("spell"));
     Hero opponent = Hero.fromObject(payload.get("opponent"));
     Hero current = Hero.fromObject(payload.get("current"));
-    String terrain = getTerrain(Character.class.cast(payload.get("terrain")));
+    String terrain = Symbols.getTerrain(Character.class.cast(payload.get("terrain")));
     Map options = spell.getOptions();
     float terrainModifier = new Float(1.0);
     int baseDamage = spell.getBaseDamage();

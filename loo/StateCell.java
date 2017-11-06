@@ -33,7 +33,7 @@ public final class StateCell {
 
   /**
     * move cell position.
-    * @param move position movement 
+    * @param move position movement
     */
   public void move(final Point move) {
       this.position.add(move);

@@ -2,6 +2,7 @@ package loo.reducers;
 
 import loo.StateCell;
 import loo.Actions;
+import loo.Symbols;
 import loo.Hero;
 import loo.Point;
 import statecontainer.Reducer;
@@ -10,20 +11,6 @@ import java.util.Map;
 import java.util.List;
 
 public final class MapManagement implements Reducer<List<StateCell>> {
-  private Point getMoveBy(final Character s) {
-    switch (s) {
-      case 'L':
-        return new Point(0, -1);
-      case 'R':
-        return new Point(0, 1);
-      case 'U':
-        return new Point(-1, 0);
-      case 'D':
-        return new Point(1, 0);
-      default:
-        return new Point(0, 0);
-    }
-  }
   @Override
   public List<StateCell> reduce(final List<StateCell> state, final Action action) {
     Map payload = action.getPayload();
@@ -38,7 +25,7 @@ public final class MapManagement implements Reducer<List<StateCell>> {
         for (int i = 0; i < state.size(); i++) {
           StateCell cell = state.get(i);
           if (!cell.getHero().isFrozen()) {
-            cell.move(getMoveBy(sequence.charAt(i)));
+            cell.move(Symbols.getMoveFrom(sequence.charAt(i)));
           }
         }
         return state;

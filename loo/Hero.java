@@ -7,7 +7,6 @@ import java.util.ArrayList;
   * Class providing the functionality to manange heros.
   */
 public final class Hero {
-  private static final int FROM_PROCENT = 100;
   private static final int LEVEL_UP_LIMIT = 200;
   private static final int LEVEL_MULTIPLIER = 40;
   private static final int LEVEL_UP_EXPERINCE = 250;
@@ -84,10 +83,10 @@ public final class Hero {
   }
 
   /**
-  * Increase the current level .
+  * Increase the current level if possible.
   */
   public void levelUP() {
-    if(this.getLevel() * LEVEL_UP_EXPERINCE_MULTLIPLIER > LEVEL_UP_EXPERINCE) {
+    if (this.getLevel() * LEVEL_UP_EXPERINCE_MULTLIPLIER > LEVEL_UP_EXPERINCE) {
       this.baseHP += this.levelupHP;
       this.currentHP = this.baseHP;
       this.spells.stream().forEach(spell -> spell.levelUP());
@@ -195,7 +194,7 @@ public final class Hero {
   */
   public float getAbilityModifier() {
     double modifier = (double) this.ability.get("modifier");
-    return (float) modifier / FROM_PROCENT;
+    return (float) modifier / Constants.FROM_PROCENT;
   }
 
   /**
@@ -258,7 +257,7 @@ public final class Hero {
   }
 
   public String toString() {
-    Character symbol = HeroFactory.getSymbolFromType(this.type);
+    Character symbol = Symbols.getHeroSymbolFromType(this.type);
     if (this.isDead()) {
       return String.format("%c dead", symbol);
     }
