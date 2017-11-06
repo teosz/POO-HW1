@@ -91,7 +91,7 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
         opponent.hit(current, modifiedDamage, plainDamage);
         opponent.freeze(rounds);
         for(int i=0;i<rounds;i++) {
-          opponent.hitWithDelay(current, modifiedDamage);
+          opponent.hitWithDelay(modifiedDamage);
         }
         return state;
       }
@@ -122,7 +122,7 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
       case "APPLY_SPELL_IGNITE": {
         opponent.hit(current,  modifiedDamage, plainDamage);
         for(int i=0;i<=1;i++) {
-          opponent.hitWithDelay(current, Math.round(50*totalModifier));
+          opponent.hitWithDelay(Math.round(50*totalModifier));
         }
         return state;
       }
