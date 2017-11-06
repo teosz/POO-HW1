@@ -50,7 +50,7 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
 
       case "APPLY_SPELL_BACKSTAB":
         int chargeRounds = ((Double) options.get("chargeRounds")).intValue();
-        if (backStabCounter % chargeRounds == 0) {
+        if (current.getCounter() % chargeRounds == 0) {
           if (options.get("terrain").equals(terrain)) {
             float scale = new Float((Double) options.get("scale"));
             modifiedDamage = Math.round(scale * modifiedDamage);
@@ -60,7 +60,7 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
           }
         }
         opponent.hit(current, modifiedDamage, plainDamage);
-        this.backStabCounter++;
+        current.increaseCounter();
         return state;
 
       case "APPLY_SPELL_PARALYSIS":

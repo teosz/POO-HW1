@@ -19,6 +19,7 @@ public final class Hero {
   private float hp;
   private int level;
   private int experience;
+  private int counter;
   private int frozenRounds;
   private List<Spell> spells;
   private Map ability;
@@ -36,8 +37,17 @@ public final class Hero {
     this.experience = 0;
     this.level = 0;
     this.frozenRounds = 0;
+    this.counter = 0;
   }
 
+  public void increaseCounter() {
+    this.counter++;
+  }
+
+  public int getCounter() {
+    return this.counter;
+
+  }
 
   /**
     * Cast a hero from Object.
