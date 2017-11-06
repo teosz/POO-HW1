@@ -1,9 +1,7 @@
 package loo;
-import java.util.List;
 import java.util.Map;
 
-
-public class Spell {
+public final class Spell {
   private String name;
   private int baseDamage;
   private int levelupDamage;
@@ -23,9 +21,9 @@ public class Spell {
     return this.options;
   }
 
-  public float getModifier(Hero hero) {
+  public float getModifier(final Hero hero) {
     String key = hero.getType();
-    if(this.modifiers.containsKey(key)) {
+    if (this.modifiers.containsKey(key)) {
       double modifier = (double) this.modifiers.get(key);
       return (float) modifier / 100;
     }
@@ -36,7 +34,7 @@ public class Spell {
     return String.format("%s %d %d", this.name, this.baseDamage, this.levelupDamage);
   }
 
-  public static Spell fromObject(Object hero) {
+  public static Spell fromObject(final Object hero) {
     return Spell.class.cast(hero);
   }
 }

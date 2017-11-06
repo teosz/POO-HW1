@@ -7,8 +7,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.List;
 
-class ActionCreator {
-  public static Action addHero(Hero hero, Point position) {
+public final class ActionCreator {
+  private ActionCreator() {
+
+  }
+  public static Action addHero(final Hero hero, final Point position) {
     Map<String, Object> payload = new HashMap<String, Object>();
     payload.put("hero", hero);
     payload.put("position", position);
@@ -17,7 +20,8 @@ class ActionCreator {
       payload);
   }
 
-  public static Action spell(final Spell spell, final Hero current, final Hero opponent, final Character terrain) {
+  public static Action spell(final Spell spell, final Hero current,
+    final Hero opponent, final Character terrain) {
     Map<String, Object> payload = new HashMap<String, Object>();
     payload.put("current", current);
     payload.put("opponent", opponent);
@@ -29,7 +33,8 @@ class ActionCreator {
     );
   }
 
-  public static Stream<Action> spellFromHero(final Hero current, final Hero opponent, final Character terrain) {
+  public static Stream<Action> spellFromHero(final Hero current,
+    final Hero opponent, final Character terrain) {
     return current.getSpells().stream().map(spell ->
       spell(spell, current, opponent, terrain)
     );
@@ -63,7 +68,7 @@ class ActionCreator {
     return new Action(Actions.END_BATTLE);
   }
 
-  public static Action moveBySequence(String sequence) {
+  public static Action moveBySequence(final String sequence) {
     Map<String, Object> payload = new HashMap<String, Object>();
     payload.put("sequence", sequence);
     return new Action(

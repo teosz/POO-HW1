@@ -10,19 +10,18 @@ import java.util.Map;
 import java.util.List;
 
 public final class MapManagement implements Reducer<List<StateCell>> {
-  private Point getMoveBy(Character s) {
-    switch(s) {
+  private Point getMoveBy(final Character s) {
+    switch (s) {
       case 'L':
-        return new Point(0,-1);
+        return new Point(0, -1);
       case 'R':
-        return new Point(0,1);
+        return new Point(0, 1);
       case 'U':
-        return new Point(1,0);
+        return new Point(1, 0);
       case 'D':
-        return new Point(-1,0);
+        return new Point(-1, 0);
       default:
-        return new Point(0,0);
-
+        return new Point(0, 0);
     }
   }
   @Override
@@ -36,9 +35,9 @@ public final class MapManagement implements Reducer<List<StateCell>> {
         return state;
       case Actions.MOVE_BY_SEQUENCE:
         String sequence = payload.get("sequence").toString();
-        for(int i = 0; i < state.size(); i++) {
+        for (int i = 0; i < state.size(); i++) {
           StateCell cell = state.get(i);
-          if(!cell.getHero().isFrozen()) {
+          if (!cell.getHero().isFrozen()) {
             cell.move(getMoveBy(sequence.charAt(i)));
           }
         }

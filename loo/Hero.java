@@ -240,7 +240,7 @@ public final class Hero {
 
 
   /**
-  * Check if is dead
+  * Check if is dead.
   * @return true if dead false otherwise
   */
   public boolean isDead() {

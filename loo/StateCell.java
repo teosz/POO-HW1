@@ -8,7 +8,6 @@ public final class StateCell {
     this.position = position;
   }
 
-
   public Point getPosition() {
     return position;
   }
@@ -16,12 +15,13 @@ public final class StateCell {
   public Hero getHero() {
     return hero;
   }
-  public void move(Point move) {
+  public void move(final Point move) {
       this.position.add(move);
   }
   public String toString() {
-    if(this.hero.isDead())
+    if (this.hero.isDead()) {
       return String.format("%s", this.hero);
+    }
     return String.format("%s %s", this.hero, this.position);
   }
 }
