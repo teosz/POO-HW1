@@ -46,7 +46,10 @@ public final class Hero {
 
   public int getCounter() {
     return this.counter;
+  }
 
+  public void resetCounter() {
+    this.counter = 0;
   }
 
   /**

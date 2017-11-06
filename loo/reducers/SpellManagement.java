@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 public final class SpellManagement implements Reducer<List<StateCell>> {
-  private static int backStabCounter = 0;
   @Override
   public List<StateCell> reduce(final List<StateCell> state, final Action action) {
     Map payload = action.getPayload();
@@ -56,7 +55,7 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
             modifiedDamage = Math.round(scale * modifiedDamage);
             plainDamage = Math.round(scale * plainDamage);
           } else {
-            backStabCounter = 0;
+            current.resetCounter();
           }
         }
         opponent.hit(current, modifiedDamage, plainDamage);
