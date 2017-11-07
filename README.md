@@ -1,4 +1,5 @@
 # OOP Homework 1
+###### Author: Szente Teodor-Alexandru
 
 ## Prerequisite
 
@@ -7,9 +8,9 @@
 
 ## Dependency
 
-Serialization of object from config is made with GSON (`com/gson`).
+Serialization of object from config is made with [GSON](https://github.com/google/gson) (`com/gson`).
 Because is a lot more clean to keep all the game related data into JSON rather than hardcoding them.
-First atempt was to use native Oracle Nashorn for JSON parsing but is not stabile and the documentation is unsynchronized with the code.
+First attempt was to use native Oracle Nashorn for JSON parsing but is not stable and the documentation is unsynchronized with the code.
 
 ## Game config
 
@@ -116,7 +117,7 @@ The only matching I need is action type matching which is done like in the origi
 
 ### Post Insights
 
-This kind of homework encourages students to make a mistake I see frequently in code: data abstraction should dictates how code looks like not the other way around: the only reason to make a subclasses is is that code looks more beautiful but this is not correct from a conceptual point of view.
+This kind of homework encourages students to make a mistake I see frequently in code: data abstraction should dictates how code looks like not the other way around: the only reason to make subclasses is that code looks more beautiful but this is not correct from a conceptual point of view.
 
 `John` is an instance (not an extension) of the class Human, analogously `Wizard` is an **instance** of `Hero`.
 
