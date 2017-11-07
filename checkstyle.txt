@@ -1,2 +1,9 @@
 Starting audit...
+[ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/SpellManagement.java:186: Line has trailing spaces. [RegexpSingleline]
+[ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/MapManagement.java:12: First sentence should end with a period. [JavadocStyle]
+[ERROR] /home/teosz/Courses/2/POO/HW1/loo/Game.java:82: Line has trailing spaces. [RegexpSingleline]
+[ERROR] /home/teosz/Courses/2/POO/HW1/loo/Symbols.java:2: First sentence should end with a period. [JavadocStyle]
+[ERROR] /home/teosz/Courses/2/POO/HW1/statecontainer/Store.java:3: First sentence should end with a period. [JavadocStyle]
+[ERROR] /home/teosz/Courses/2/POO/HW1/statecontainer/Store.java:10: First sentence should end with a period. [JavadocStyle]
 Audit done.
+Checkstyle ends with 6 errors.

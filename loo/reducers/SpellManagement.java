@@ -10,6 +10,10 @@ import statecontainer.Action;
 import java.util.List;
 import java.util.Map;
 
+
+/**
+  * Reducer which all deals with all the actions affecting heros from spells.
+  */
 public final class SpellManagement implements Reducer<List<StateCell>> {
   private Map payload;
   private Spell spell;
@@ -25,14 +29,24 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
   private int plainDamage;
   private int modifiedDamage;
 
+  /**
+    * @return terrain symbol from payload.
+    */
   private Character getTerrainSymbol() {
     return Character.class.cast(this.payload.get("terrain"));
   }
 
+
+  /**
+    * @return terrain type from symbol.
+    */
   private String getTerrain() {
      return Symbols.getTerrain(this.getTerrainSymbol());
   }
 
+  /**
+    * @return terrain modifier from payload.
+    */
   private float getTerrainModifier() {
      if (this.current.getAbilityTerrain().equals(this.terrain)) {
        return 1.0f + current.getAbilityModifier();
@@ -40,12 +54,20 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
      return 1.0f;
   }
 
+  /**
+    * computes all the modifiers from payload and store them
+    * into current instance.
+    */
   private void computeModifier() {
     this.spellModifier = 1 + this.spell.getModifier(opponent);
     this.terrainModifier = this.getTerrainModifier();
     this.totalModifier = spellModifier * terrainModifier;
   }
 
+  /**
+    * computes all the damage from payload and store
+    * into current instance.
+    */
   private void computeDamage() {
     this.baseDamage = spell.getBaseDamage();
     this.plainDamage = Math.round(baseDamage * terrainModifier);
@@ -54,6 +76,9 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
 
   }
 
+  /**
+    * extract the payload into current instance.
+    */
   private void extractPayload(final Action action) {
     this.payload = action.getPayload();
     this.spell = Spell.fromObject(payload.get("spell"));
@@ -65,10 +90,16 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
     this.computeDamage();
   }
 
-  private boolean canApplySpell() {
+  /**
+    * @return true if the spellModifier is applicabile.
+    */
+  private boolean spellModifierApplicable() {
     return spellModifier != 1.0;
   }
 
+  /**
+    * @return all the plain damage received by current hero.
+    */
   private int getPlainHits() {
     return current.getPlainHits()
       .stream()
@@ -76,12 +107,20 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
       .sum();
   }
 
+
+  /**
+    * @return the proportionate health of the opponent.
+    */
   private float getProportionateHP() {
     return Math.min(
       this.getScale() * opponent.getBaseHP(),
       opponent.getCurrentHP()
     );
   }
+
+  /**
+    * apply critical with the parameters from options.
+    */
   private void applyCritical() {
     if (options.get("terrain").equals(terrain)) {
       float scale = new Float((Double) options.get("scale"));
@@ -92,6 +131,10 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
     }
   }
 
+
+  /**
+    * @return noOfRounds for DoT on the current terrain.
+    */
   private int getRoundsOnTerrain() {
     String spellTerrainType = options.get("terrainType").toString();
     if (spellTerrainType.equals(terrain)) {
@@ -101,28 +144,46 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
     }
   }
 
+  /**
+    * @return number of rounds from spell options.
+    */
   private int getRounds() {
     return ((Double) options.get("rounds")).intValue();
   }
 
+  /**
+    * @return number the damage base limit from spell options.
+    */
   private float getBaseLimit() {
     return ((Double) options.get("baseLimit")).intValue() / Constants.FROM_PROCENT;
   }
 
+  /**
+    * @return the scale of the hit from spell options.
+    */
   private float getScale() {
     return ((Double) options.get("scale")).intValue() / Constants.FROM_PROCENT;
   }
 
+  /**
+    * @return the spell damage from spell options.
+    */
   private int getSpellDamage() {
     return ((Double) options.get("damage")).intValue();
   }
 
+  /**
+    * add to opponent delayed hit damage for a given number of rounds.
+    * @param rounds noOfRounds
+    * @param damage damge to be hit
+    */
   private void hitNoOfRounds(final int rounds, final int damage) {
     for (int i = 0; i < rounds; i++) {
       opponent.hitWithDelay(damage);
     }
 
   }
+  
   @Override
   public List<StateCell> reduce(final List<StateCell> state, final Action action) {
     this.extractPayload(action);
@@ -145,7 +206,7 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
         return state;
 
       case "APPLY_SPELL_DEFLECT":
-        if (canApplySpell()) {
+        if (spellModifierApplicable()) {
           int sum = this.getPlainHits();
           opponent.hit(current, Math.round(percentage * sum * totalModifier));
         }

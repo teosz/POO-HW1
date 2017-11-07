@@ -40,18 +40,6 @@ public final class Hero {
     this.counter = 0;
   }
 
-  public void increaseCounter() {
-    this.counter++;
-  }
-
-  public int getCounter() {
-    return this.counter;
-  }
-
-  public void resetCounter() {
-    this.counter = 0;
-  }
-
   /**
     * Cast a hero from Object.
     * @param hero object to be casted
@@ -140,6 +128,13 @@ public final class Hero {
   }
 
   /**
+  * Increase hero counter.
+  */
+  public void increaseCounter() {
+    this.counter++;
+  }
+
+  /**
   * Check if the hero has a killler.
   * @return true if killer exists false otherwise
   */
@@ -160,6 +155,13 @@ public final class Hero {
   */
   public void clearPlainHits() {
     this.plainHits.clear();
+  }
+
+  /**
+    * reset hero counter.
+    */
+  public void resetCounter() {
+    this.counter = 0;
   }
 
   /**
@@ -261,6 +263,12 @@ public final class Hero {
     return this.spells;
   }
 
+  /**
+    * @return hero counter.
+    */
+  public int getCounter() {
+    return this.counter;
+  }
 
   /**
   * Check if is dead.

@@ -7,6 +7,10 @@ import statecontainer.Reducer;
 import statecontainer.Action;
 import java.util.List;
 
+
+/**
+  * Reducer which all deals with all the actions affecting round logic.
+  */
 public final class RoundManagement implements Reducer<List<StateCell>> {
   @Override
   public List<StateCell> reduce(final List<StateCell> state, final Action action) {

@@ -6,6 +6,9 @@ import statecontainer.Reducer;
 import statecontainer.Action;
 import java.util.List;
 
+/**
+  * Reducer which combine all the apllication Reducers.
+  */
 public final class Combined implements Reducer<List<StateCell>> {
   @Override
   public List<StateCell> reduce(final List<StateCell> state, final Action action) {
