@@ -1,9 +1,17 @@
 Starting audit...
-[ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/SpellManagement.java:24:45: '100' is a magic number. [MagicNumber]
-[ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/SpellManagement.java:34:29: '0.3f' is a magic number. [MagicNumber]
-[ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/SpellManagement.java:83:25: '0.2f' is a magic number. [MagicNumber]
-[ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/SpellManagement.java:103:36: ';' is preceded with whitespace. [NoWhitespaceBefore]
-[ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/SpellManagement.java:104:44: '50' is a magic number. [MagicNumber]
+[ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/SpellManagement.java:27:11: Redundant 'final' modifier. [RedundantModifier]
+[ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/SpellManagement.java:31:11: Redundant 'final' modifier. [RedundantModifier]
+[ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/SpellManagement.java:35:11: Redundant 'final' modifier. [RedundantModifier]
+[ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/SpellManagement.java:42:11: Redundant 'final' modifier. [RedundantModifier]
+[ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/SpellManagement.java:48:11: Redundant 'final' modifier. [RedundantModifier]
+[ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/SpellManagement.java:52:44: '100' is a magic number. [MagicNumber]
+[ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/SpellManagement.java:56:11: Redundant 'final' modifier. [RedundantModifier]
+[ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/SpellManagement.java:56:37: Parameter action should be final. [FinalParameters]
+[ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/SpellManagement.java:80:7: '0.3f' is a magic number. [MagicNumber]
+[ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/SpellManagement.java:85:7: 'if' is not followed by whitespace. [WhitespaceAround]
+[ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/SpellManagement.java:93: Line has trailing spaces. [RegexpSingleline]
+[ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/SpellManagement.java:108:61: '100' is a magic number. [MagicNumber]
+[ERROR] /home/teosz/Courses/2/POO/HW1/loo/reducers/SpellManagement.java:170:36: ';' is preceded with whitespace. [NoWhitespaceBefore]
 [ERROR] /home/teosz/Courses/2/POO/HW1/loo/Constants.java:3:1: Utility classes should not have a public or default constructor. [HideUtilityClassConstructor]
 Audit done.
-Checkstyle ends with 6 errors.
+Checkstyle ends with 14 errors.

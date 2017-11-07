@@ -112,7 +112,7 @@
       "baseDamage": 200,
       "levelupDamage": 20,
       "options": {
-        "chargeRounds": 3,
+        "rounds": 3,
         "scale": 1.5,
         "terrain": "Woods"
       },
