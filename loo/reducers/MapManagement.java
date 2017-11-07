@@ -10,7 +10,7 @@ import statecontainer.Action;
 import java.util.Map;
 import java.util.List;
 /**
-  * Reducer which all deals with all the actions affecting map
+  * Reducer which all deals with all the actions affecting map.
   */
 public final class MapManagement implements Reducer<List<StateCell>> {
   @Override

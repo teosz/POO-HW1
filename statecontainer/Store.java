@@ -1,14 +1,14 @@
 package statecontainer;
 import java.util.List;
 /**
-  * The store is the place where data is stored and mutated/
+  * The store is the place where data is stored and mutated.
   */
 public final class Store<T> {
   private T state;
   private final Reducer<T> reducer;
 
   /**
-    * Initiate a new store
+    * Initiate a new store.
     * @param reducer reducer which will be called when data is mutated
     * @param initialState the initialState
     */

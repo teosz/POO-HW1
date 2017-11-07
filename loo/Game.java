@@ -79,7 +79,7 @@ public final class Game {
     * we will have to supress the warrning because java cannot know
     * the type of a templeta at runtime and it is impossible to
     * List<T>.class.cast. In can be reflected by java 8 reflection
-    * api is unstable. 
+    * api is unstable.
     * @return State
     */
   @SuppressWarnings("unchecked")

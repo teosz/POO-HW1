@@ -1,6 +1,6 @@
 package loo;
 /**
-  * Class providing the functionality to manange symbols
+  * Class providing the functionality to manange symbols.
   */
 public final class Symbols {
   private Symbols() {

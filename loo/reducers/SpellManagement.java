@@ -183,7 +183,7 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
     }
 
   }
-  
+
   @Override
   public List<StateCell> reduce(final List<StateCell> state, final Action action) {
     this.extractPayload(action);
