@@ -1,5 +1,7 @@
 package loo;
 
 public final class Constants {
-  public static final int FROM_PROCENT = 100;
+  private Constants() {
+  }
+  public static final float FROM_PROCENT = 100f;
 }

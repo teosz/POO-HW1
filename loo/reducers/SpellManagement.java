@@ -4,6 +4,7 @@ import loo.StateCell;
 import loo.Spell;
 import loo.Hero;
 import loo.Symbols;
+import loo.Constants;
 import statecontainer.Reducer;
 import statecontainer.Action;
 import java.util.List;
@@ -24,36 +25,36 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
   private int plainDamage;
   private int modifiedDamage;
 
-  private final Character getTerrainSymbol() {
+  private Character getTerrainSymbol() {
     return Character.class.cast(this.payload.get("terrain"));
   }
 
-  private final String getTerrain() {
+  private String getTerrain() {
      return Symbols.getTerrain(this.getTerrainSymbol());
   }
 
-  private final float getTerrainModifier() {
+  private float getTerrainModifier() {
      if (this.current.getAbilityTerrain().equals(this.terrain)) {
        return 1.0f + current.getAbilityModifier();
      }
      return 1.0f;
   }
 
-  private final void computeModifier() {
+  private void computeModifier() {
     this.spellModifier = 1 + this.spell.getModifier(opponent);
     this.terrainModifier = this.getTerrainModifier();
     this.totalModifier = spellModifier * terrainModifier;
   }
 
-  private final void computeDamage() {
+  private void computeDamage() {
     this.baseDamage = spell.getBaseDamage();
     this.plainDamage = Math.round(baseDamage * terrainModifier);
     this.modifiedDamage = Math.round(baseDamage * totalModifier);
-    this.percentage = (float) baseDamage / 100;
+    this.percentage = (float) baseDamage / Constants.FROM_PROCENT;
 
   }
 
-  private final void extractPayload(Action action) {
+  private void extractPayload(final Action action) {
     this.payload = action.getPayload();
     this.spell = Spell.fromObject(payload.get("spell"));
     this.current = Hero.fromObject(payload.get("current"));
@@ -77,12 +78,12 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
 
   private float getProportionateHP() {
     return Math.min(
-      0.3f * opponent.getBaseHP(),
+      this.getScale() * opponent.getBaseHP(),
       opponent.getCurrentHP()
     );
   }
   private void applyCritical() {
-    if(options.get("terrain").equals(terrain)) {
+    if (options.get("terrain").equals(terrain)) {
       float scale = new Float((Double) options.get("scale"));
       modifiedDamage = Math.round(scale * modifiedDamage);
       plainDamage = Math.round(scale * plainDamage);
@@ -90,7 +91,7 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
       current.resetCounter();
     }
   }
-  
+
   private int getRoundsOnTerrain() {
     String spellTerrainType = options.get("terrainType").toString();
     if (spellTerrainType.equals(terrain)) {
@@ -105,19 +106,41 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
   }
 
   private float getBaseLimit() {
-    return ((Double) options.get("baseLimit")).intValue() / 100;
+    return ((Double) options.get("baseLimit")).intValue() / Constants.FROM_PROCENT;
   }
 
+  private float getScale() {
+    return ((Double) options.get("scale")).intValue() / Constants.FROM_PROCENT;
+  }
+
+  private int getSpellDamage() {
+    return ((Double) options.get("damage")).intValue();
+  }
+
+  private void hitNoOfRounds(final int rounds, final int damage) {
+    for (int i = 0; i < rounds; i++) {
+      opponent.hitWithDelay(damage);
+    }
+
+  }
   @Override
   public List<StateCell> reduce(final List<StateCell> state, final Action action) {
     this.extractPayload(action);
     switch (action.getType()) {
-      case "APPLY_SPELL_DRAIN":
-        float hp = this.getProportionateHP();
-        opponent.hit(
-          current,
-          Math.round(totalModifier * percentage * hp),
-          Math.round(spellModifier * percentage * hp)
+      case "APPLY_SPELL_SLAM":
+        opponent.hit(current,  modifiedDamage, plainDamage);
+        opponent.freeze(this.getRounds());
+        return state;
+
+      case "APPLY_SPELL_FIREBLAST":
+        opponent.hit(current,  modifiedDamage, plainDamage);
+        return state;
+
+      case "APPLY_SPELL_IGNITE":
+        opponent.hit(current,  modifiedDamage, plainDamage);
+        this.hitNoOfRounds(
+          this.getRounds(),
+          Math.round(this.getSpellDamage() * totalModifier)
         );
         return state;
 
@@ -140,9 +163,7 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
         int rounds = this.getRoundsOnTerrain();
         opponent.hit(current, modifiedDamage, plainDamage);
         opponent.freeze(rounds);
-        for (int i = 0; i < rounds; i++) {
-          opponent.hitWithDelay(modifiedDamage);
-        }
+        this.hitNoOfRounds(rounds, modifiedDamage);
         return state;
 
       case "APPLY_SPELL_EXECUTE":
@@ -154,23 +175,15 @@ public final class SpellManagement implements Reducer<List<StateCell>> {
         }
         return state;
 
-      case "APPLY_SPELL_SLAM":
-        opponent.hit(current,  modifiedDamage, plainDamage);
-        opponent.freeze(this.getRounds());
+      case "APPLY_SPELL_DRAIN":
+        float hp = this.getProportionateHP();
+        opponent.hit(
+          current,
+          Math.round(totalModifier * percentage * hp),
+          Math.round(spellModifier * percentage * hp)
+        );
         return state;
 
-      case "APPLY_SPELL_FIREBLAST":
-        opponent.hit(current,  modifiedDamage, plainDamage);
-        return state;
-
-      case "APPLY_SPELL_IGNITE":
-        opponent.hit(current,  modifiedDamage, plainDamage);
-        int attack = ((Double) options.get("damage")).intValue();
-        int roundsD = this.getRounds();
-        for (int i = 0; i < roundsD ; i++) {
-          opponent.hitWithDelay(Math.round(attack * totalModifier));
-        }
-        return state;
 
       default:
         return state;

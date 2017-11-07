@@ -53,7 +53,7 @@
         "Wizard": -20
       }
     }, {
-      "name": "slam",
+       "name": "slam",
        "baseDamage": 100,
        "levelupDamage": 40,
        "options": {
@@ -79,6 +79,9 @@
       "name": "drain",
       "baseDamage": 20,
       "levelupDamage": 5,
+      "options": {
+        "scale": 30
+      },
       "modifiers": {
         "Rogue":	-20,
         "Knight":	20,
